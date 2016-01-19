@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Chase : MonoBehaviour {
-
+public class Citizen : MonoBehaviour
+{
     private GameObject target;
     private NavMeshAgent agent;
 
-	void Start ()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-	}
-	
-	void Update ()
+    }
+
+    void Update()
     {
-        if (target) 
+        if (target)
         {
             agent.destination = target.transform.position;
         }
-	}
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "NPC")
+        // tell agent to chase player
+        if (other.gameObject.tag == "Player")
         {
             this.target = other.gameObject;
         }

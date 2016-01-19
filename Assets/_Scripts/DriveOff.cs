@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DriveOff : MonoBehaviour {
-
+public class DriveOff : MonoBehaviour
+{
     public float speed = 10.0f;
     private bool drive_off;
 
-	void Start () {
+	void Start ()
+    {
         drive_off = false;
 	}
 	
-	void Update () {
+	void Update ()
+    {
         if (drive_off)
         {
             transform.position += transform.forward * speed * Time.deltaTime;

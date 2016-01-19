@@ -2,7 +2,6 @@
 
 public class ClickToMoveTo : MonoBehaviour
 {
-
     private NavMeshAgent agent;
 
     void Start()
@@ -10,7 +9,6 @@ public class ClickToMoveTo : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
