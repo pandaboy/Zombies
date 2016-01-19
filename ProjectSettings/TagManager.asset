@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Environment
+  - Zombie
+  - NPC
+  - EscapeVehicle
+  - Collectable
   layers:
   - Default
   - TransparentFX
