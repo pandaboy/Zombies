@@ -9,7 +9,7 @@ public class Chase : MonoBehaviour
     private GameObject target;
     private NavMeshAgent agent;
 
-	void Start ()
+	void Awake ()
     {
         agent = GetComponent<NavMeshAgent>();
         SetFollow(this.follow);
@@ -28,13 +28,12 @@ public class Chase : MonoBehaviour
     {
         if (target != null) 
             agent.destination = target.transform.position;
-
 	}
 
     void OnTriggerEnter(Collider other)
     {
         // check if we have any tags first
-        if (this.targetTags.Length == 0)
+        if (this.targetTags == null || this.targetTags.Length == 0)
             return;
 
         // we don't chase Zombies
