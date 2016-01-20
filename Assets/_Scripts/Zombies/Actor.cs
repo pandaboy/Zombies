@@ -1,4 +1,5 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using RelationshipGraph.Interfaces;
 using Zombies;
 
@@ -7,8 +8,13 @@ namespace Zombies
     /// <summary>
     /// Basic Actor implementation
     /// </summary>
-    public class Actor : INode<Actor>
+    public class Actor : MonoBehaviour, INode<Actor>
     {
+        /// <summary>
+        /// Type of Actor. Uses Zombies.ActorType enum
+        /// </summary>
+        public ActorType actorType;
+
         /// <summary>
         /// HandleMessage receives IMessage's sent to the Node
         /// </summary>
@@ -35,6 +41,11 @@ namespace Zombies
                 return false;
 
             return true;
+        }
+
+        void Start()
+        {
+            Debug.Log("Hello! I'm " + this.name + "! And I'm a " + this.actorType + " actor type!");
         }
     }
 }

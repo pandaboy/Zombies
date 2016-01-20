@@ -85,10 +85,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 23800000, guid: 1aba9162787b8094eac3b3ec61b54193, type: 2}
---- !u!4 &60625282 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 471046, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-  m_PrefabInternal: {fileID: 1379370114}
 --- !u!1001 &72569116
 Prefab:
   m_ObjectHideFlags: 0
@@ -455,23 +451,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 489288, guid: bd4046d6235a746c1b31422a62182efe, type: 2}
   m_PrefabInternal: {fileID: 332409801}
---- !u!1 &477099260 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 102942, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-  m_PrefabInternal: {fileID: 1379370114}
---- !u!114 &477099263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 477099260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4a19a50da796445addd5c074773a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handCollectable: {fileID: 60625282}
-  headCollectable: {fileID: 2050458645}
 --- !u!1001 &489358505
 Prefab:
   m_ObjectHideFlags: 0
@@ -695,43 +674,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 408540, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 194526, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_Name
-      value: Citizen 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 102942, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_TagString
-      value: NPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 471046, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 471046, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 471046, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 471046, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 471046, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: 181866, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_Name
-      value: Hand
-      objectReference: {fileID: 0}
-    - target: {fileID: 113858, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-      propertyPath: m_Name
-      value: OverHead
+    - target: {fileID: 11412496, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
+      propertyPath: actorType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
@@ -1162,23 +1109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2f38d8a0b83aa4bbe22b73c39f5472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1806027334 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 194526, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-  m_PrefabInternal: {fileID: 1379370114}
---- !u!114 &1806027335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1806027334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4a19a50da796445addd5c074773a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handCollectable: {fileID: 60625282}
-  headCollectable: {fileID: 2050458645}
 --- !u!1001 &1996215884
 Prefab:
   m_ObjectHideFlags: 0
@@ -1237,10 +1167,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 489288, guid: bd4046d6235a746c1b31422a62182efe, type: 2}
   m_PrefabInternal: {fileID: 1996215884}
---- !u!4 &2050458645 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 483510, guid: c1662839c70b5d7498a0dc02ebe3d6fd, type: 2}
-  m_PrefabInternal: {fileID: 1379370114}
 --- !u!1001 &2062473948
 Prefab:
   m_ObjectHideFlags: 0
