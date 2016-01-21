@@ -1,7 +1,29 @@
 ﻿using UnityEngine;
+using Zombies;
 
 // detects if the character was clicked on
-public class ClickCharacter : MonoBehaviour {
+public class ClickCharacter : MonoBehaviour
+{
+    private Actor actor;
+
+    private GameController _gc;
+    public GameController GC
+    {
+        set
+        {
+            _gc = value;
+        }
+
+        get
+        {
+            return _gc;
+        }
+    }
+
+    void Start()
+    {
+        this.actor = GetComponent<Actor>();
+    }
 	
 	void Update ()
     {
@@ -13,9 +35,11 @@ public class ClickCharacter : MonoBehaviour {
             {
                 if (hit.transform.tag == "NPC")
                 {
-                    hit.transform.gameObject.GetComponent<Stats>().ShowStats();
+                    GameController.UpdateDialog(
+                        "Hi! I'm a " + this.actor.actorType + " type!"
+                    );
                 }
             }
         }
-	}
+    }
 }

@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    // Prefabs
+    // UI.Text to display information to
+    public Text dialogText;
+
+    // Player information
+    public GameObject playerPrefab;
+    public Transform playerLocation;
+
+    // Zombies, Items and Citizens
     public GameObject[] zombiePrefabs;
-    public GameObject[] citizenPrefabs;
-    public GameObject[] itemPrefabs;
-    
-    // spawnlocations
     public Transform[] zombieLocations;
-    public Transform[] citizenLocations;
+    public GameObject[] itemPrefabs;
     public Transform[] itemLocations;
+    public GameObject[] citizenPrefabs;
+    public Transform[] citizenLocations;
 
     // counters
     private int rescued = 0;
@@ -20,6 +26,9 @@ public class GameController : MonoBehaviour
 
 	void Start ()
     {
+        // spawn the player
+        Instantiate(playerPrefab, playerLocation.position, Quaternion.identity);
+
         // spawn the zombies
         if (zombiePrefabs.Length > 0)
         {
@@ -32,7 +41,8 @@ public class GameController : MonoBehaviour
         if (citizenPrefabs.Length > 0)
         {
             for (int i = 0; i < citizenLocations.Length; i++) {
-                Instantiate(citizenPrefabs[(i % citizenPrefabs.Length)], citizenLocations[i].position, Quaternion.identity);
+                GameObject c = Instantiate(citizenPrefabs[(i % citizenPrefabs.Length)], citizenLocations[i].position, Quaternion.identity) as GameObject;
+                c.GetComponent<ClickCharacter>().GC = this;
             }
         }
 
@@ -88,5 +98,10 @@ public class GameController : MonoBehaviour
     void buildRelationships()
     {
         // set up relationships using the ZombieGraph here
+    }
+
+    public void UpdateDialog(string msg)
+    {
+        dialogText.text = msg;
     }
 }

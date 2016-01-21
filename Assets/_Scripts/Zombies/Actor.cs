@@ -42,10 +42,5 @@ namespace Zombies
 
             return true;
         }
-
-        void Start()
-        {
-            Debug.Log("Hello! I'm " + this.name + "! And I'm a " + this.actorType + " actor type!");
-        }
     }
 }
