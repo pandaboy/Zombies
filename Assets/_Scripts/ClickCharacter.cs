@@ -35,7 +35,7 @@ public class ClickCharacter : MonoBehaviour
             {
                 if (hit.transform.tag == "NPC")
                 {
-                    GameController.UpdateDialog(
+                    this.GC.UpdateDialog(
                         "Hi! I'm a " + this.actor.actorType + " type!"
                     );
                 }

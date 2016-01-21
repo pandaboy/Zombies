@@ -7,7 +7,7 @@ public class Collectable : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "NPC") {
+        if(other.gameObject.tag == "Player") {
             other.gameObject.GetComponent<Collect>().placeItem(gameObject, collectableType);
         }
     }

@@ -2,7 +2,7 @@
 
 public class Stats : MonoBehaviour
 {
-    // these are the items the characters care about
+    // stuff the characters care about
     public int safety = 1;
 
     public void ShowStats()
