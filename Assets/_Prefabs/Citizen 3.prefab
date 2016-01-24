@@ -14,7 +14,9 @@ GameObject:
   - 114: {fileID: 11411236}
   - 114: {fileID: 11459826}
   - 114: {fileID: 11407958}
-  - 114: {fileID: 11455742}
+  - 135: {fileID: 13587214}
+  - 114: {fileID: 11432818}
+  - 114: {fileID: 11475770}
   m_Layer: 0
   m_Name: Citizen 3
   m_TagString: NPC
@@ -34,7 +36,7 @@ GameObject:
   - 23: {fileID: 2378744}
   m_Layer: 0
   m_Name: chr_beardo2
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +50,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 495788}
   - 136: {fileID: 13656662}
-  - 114: {fileID: 11440990}
   m_Layer: 0
   m_Name: Collider
   m_TagString: NPC
@@ -151,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f496abd37f9eaaf49b12bfc207683549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsOfInterest: []
 --- !u!114 &11411236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,19 +164,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   safety: 1
---- !u!114 &11440990
+--- !u!114 &11432818
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157538}
+  m_GameObject: {fileID: 100472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4a19a50da796445addd5c074773a23, type: 3}
+  m_Script: {fileID: 11500000, guid: da5a8cb42774c0345bcd889f716053b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handCollectable: {fileID: 0}
-  headCollectable: {fileID: 0}
 --- !u!114 &11448708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,18 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2f38d8a0b83aa4bbe22b73c39f5472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11455742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1f3017cf229c349bf81132157636c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  follow: Player
 --- !u!114 &11459826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,6 +198,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorType: 2
+--- !u!114 &11475770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1fb8b707a9eaf44bc6b85a347dffad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsOfInterest:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!135 &13587214
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: .5, z: 0}
 --- !u!136 &13656662
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -233,11 +245,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 100472}
   m_Enabled: 1
   m_Radius: .5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -251,7 +263,31 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: pointsOfInterest.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_StoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100472}

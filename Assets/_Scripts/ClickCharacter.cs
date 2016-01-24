@@ -4,7 +4,7 @@ using Zombies;
 // detects if the character was clicked on
 public class ClickCharacter : MonoBehaviour
 {
-    private Actor actor;
+    private Actor _actor;
 
     private GameController _gc;
     public GameController GC
@@ -22,7 +22,7 @@ public class ClickCharacter : MonoBehaviour
 
     void Start()
     {
-        this.actor = GetComponent<Actor>();
+        this._actor = GetComponent<Actor>();
     }
 	
 	void Update ()
@@ -35,8 +35,9 @@ public class ClickCharacter : MonoBehaviour
             {
                 if (hit.transform.tag == "NPC")
                 {
-                    this.GC.UpdateDialog(
-                        "Hi! I'm a " + this.actor.actorType + " type!"
+                    //this._gc.UpdateDialog(
+                    Debug.Log(
+                        "Hi! I'm a " + this._actor.actorType + " type!"
                     );
                 }
             }

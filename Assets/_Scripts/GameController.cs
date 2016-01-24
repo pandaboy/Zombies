@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using RelationshipGraph;
+using Zombies;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class GameController : MonoBehaviour
     // Player information
     public GameObject playerPrefab;
     public Transform playerLocation;
+    private GameObject player;
 
     // Zombies, Items and Citizens
     public GameObject[] zombiePrefabs;
@@ -24,34 +27,55 @@ public class GameController : MonoBehaviour
     private int zombified = 0;
     private int items = 0;
 
+    // RelationshipGraph Stuff
+    private ZombieGraph graph = ZombieGraph.Instance;
+
+    // relationships in use
+    private Relationship trust = new Relationship(Zombies.RelationshipType.TRUST);
+    private Relationship distrust = new Relationship(Zombies.RelationshipType.DISTRUST);
+
 	void Start ()
     {
         // spawn the player
-        Instantiate(playerPrefab, playerLocation.position, Quaternion.identity);
+        player = Instantiate(playerPrefab, playerLocation.position, playerLocation.rotation) as GameObject;
 
         // spawn the zombies
-        if (zombiePrefabs.Length > 0)
+        if (zombiePrefabs.Length > 0 && zombieLocations.Length > 0)
         {
             for(int i = 0; i < zombieLocations.Length; i++) {
-                Instantiate(zombiePrefabs[(i % zombiePrefabs.Length)], zombieLocations[i].position, Quaternion.identity);
+                Instantiate(
+                    zombiePrefabs[(i % zombiePrefabs.Length)],
+                    zombieLocations[i].position,
+                    zombieLocations[i].rotation
+                );
             }
         }
 
         // spawn the citizens
-        if (citizenPrefabs.Length > 0)
+        if (citizenPrefabs.Length > 0 && citizenLocations.Length > 0)
         {
             for (int i = 0; i < citizenLocations.Length; i++) {
-                GameObject c = Instantiate(citizenPrefabs[(i % citizenPrefabs.Length)], citizenLocations[i].position, Quaternion.identity) as GameObject;
+                GameObject c = Instantiate(
+                    citizenPrefabs[(i % citizenPrefabs.Length)],
+                    citizenLocations[i].position,
+                    citizenLocations[i].rotation
+                ) as GameObject;
                 c.GetComponent<ClickCharacter>().GC = this;
+                c.GetComponent<Actor>();
+                graph.AddDirectConnection(new Connection(c, player, trust));
             }
         }
 
         // spawn the items
-        if (itemPrefabs.Length > 0)
+        if (itemPrefabs.Length > 0 && itemLocations.Length > 0)
         {
             for (int i = 0; i < itemLocations.Length; i++)
             {
-                Instantiate(itemPrefabs[(i % itemPrefabs.Length)], itemLocations[i].position, Quaternion.identity);
+                Instantiate(
+                    itemPrefabs[(i % itemPrefabs.Length)],
+                    itemLocations[i].position,
+                    itemLocations[i].rotation
+                );
             }
         }
 	}

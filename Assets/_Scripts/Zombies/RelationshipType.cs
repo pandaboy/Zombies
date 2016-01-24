@@ -2,7 +2,7 @@
 {
     public enum RelationshipType
     {
-        TRUST,
-        DISTRUST
+        TRUST,      // Actor either trusts, or
+        DISTRUST    // distrusts another actor
     }
 }

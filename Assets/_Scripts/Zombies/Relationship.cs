@@ -6,6 +6,11 @@ namespace Zombies
 {
     public class Relationship : IRelationship<Relationship>
     {
+        public Relationship(RelationshipType type = RelationshipType.DISTRUST)
+        {
+            this.RelationshipType = type;
+        }
+
         /// <summary>
         /// Type of Relationship. Uses Zombies.RelationshipType enum
         /// </summary>
@@ -39,10 +44,14 @@ namespace Zombies
         public bool Equals(Relationship other)
         {
             if (other == null)
+            {
                 return false;
+            }
 
             if (this.RelationshipType == other.RelationshipType)
+            {
                 return true;
+            }
 
             return false;
         }

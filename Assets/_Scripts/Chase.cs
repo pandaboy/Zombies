@@ -7,6 +7,18 @@ public class Chase : MonoBehaviour
 
     private string[] targetTags;
     private GameObject target;
+    public GameObject Target
+    {
+        get
+        {
+            return target;
+        }
+
+        set
+        {
+            target = value;
+        }
+    }
     private NavMeshAgent agent;
 
 	void Awake ()

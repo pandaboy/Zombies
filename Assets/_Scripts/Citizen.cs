@@ -1,33 +1,41 @@
 ﻿using UnityEngine;
+using Zombies;
 
 public class Citizen : MonoBehaviour
 {
-    public Transform[] pointsOfInterest;
-
-    private int currentInterest = 0;
-    private NavMeshAgent agent;
+    private ZombieGraph _graph = ZombieGraph.Instance;
+    private Follow _follow;
+    private Actor _thisActor;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        GoToPointOfInterest();
+        this._follow = GetComponent<Follow>();
+        this._thisActor = GetComponent<Actor>();
     }
 
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        GoToPointOfInterest();
+        if (other.gameObject.tag == "Player")
+        {
+            CheckRelationship(other.gameObject);
+        }
     }
 
-    void GoToPointOfInterest()
+    private void CheckRelationship(GameObject other)
     {
-        // check if there's anywhere to go
-        if (pointsOfInterest.Length == 0)
-            return;
+        Actor otherActor = other.GetComponent<Actor>() as Actor;
 
-        if (agent.remainingDistance < 0.5f || agent.destination == Vector3.zero) {
-            currentInterest = (currentInterest + 1) % pointsOfInterest.Length;
-            agent.destination = pointsOfInterest[currentInterest].position;
+        // Get the direct connection from this actor to the other
+        RelationshipType type = this._graph
+            .GetConnection(this._thisActor, otherActor)
+            .Relationship
+            .RelationshipType;
+
+        if (type == RelationshipType.TRUST) {
+            this._follow.Target = other;
+            this._follow.CanFollow = true;
         }
 
+        // Next check the other connections
     }
 }
