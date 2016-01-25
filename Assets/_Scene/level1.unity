@@ -276,6 +276,18 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a750e7f7104f184448b885ab201be74d, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &180444017 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11423162, guid: a750e7f7104f184448b885ab201be74d,
+    type: 2}
+  m_PrefabInternal: {fileID: 180444016}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &180444018 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11434118, guid: a750e7f7104f184448b885ab201be74d,
+    type: 2}
+  m_PrefabInternal: {fileID: 180444016}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &192597207
 Prefab:
   m_ObjectHideFlags: 0
@@ -1363,6 +1375,18 @@ Prefab:
       propertyPath: groupPrefab
       value: 
       objectReference: {fileID: 120648, guid: 92ec759c26d521e448d72162ccf54844, type: 2}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 180444017}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: titleText
+      value: 
+      objectReference: {fileID: 180444018}
+    - target: {fileID: 11429842, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: nextLevel
+      value: level2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_IsPrefabParent: 0

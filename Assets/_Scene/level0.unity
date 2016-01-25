@@ -86,7 +86,7 @@ NavMeshSettings:
     minRegionArea: 2
     cellSize: .166666672
     manualCellSize: 0
-  m_NavMeshData: {fileID: 23800000, guid: 8ecea263364c7c647940ad445e4c438c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 580a2ee65fa50da4b8a6c2805627cedb, type: 2}
 --- !u!1 &79380184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1204,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 477652, guid: 66f0c82ed23594d34848540f7d86c5ea, type: 2}
   m_PrefabInternal: {fileID: 1237942009}
+--- !u!114 &1242995647 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11429842, guid: 27e1ac614bff6764897253736fa66c4a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1556733263}
+  m_Script: {fileID: 11500000, guid: 42d3b9f7b02bf5f4a8cc83a003ffff73, type: 3}
 --- !u!1 &1308400026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,6 +1407,18 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11422234, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1242995647}
+    - target: {fileID: 11416154, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1242995647}
+    - target: {fileID: 11434118, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_Text
+      value: GAME OVER
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a750e7f7104f184448b885ab201be74d, type: 2}
   m_IsPrefabParent: 0
@@ -1412,7 +1430,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!114 &1459373426 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11478860, guid: a750e7f7104f184448b885ab201be74d,
+  m_PrefabParentObject: {fileID: 11438274, guid: a750e7f7104f184448b885ab201be74d,
     type: 2}
   m_PrefabInternal: {fileID: 1459373424}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -1480,6 +1498,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 477652, guid: 66f0c82ed23594d34848540f7d86c5ea, type: 2}
   m_PrefabInternal: {fileID: 1481236052}
+--- !u!114 &1554283970 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11434118, guid: a750e7f7104f184448b885ab201be74d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1459373424}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1556733263
 Prefab:
   m_ObjectHideFlags: 0
@@ -1520,25 +1544,29 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
-      propertyPath: infoText
+      propertyPath: titleText
       value: 
-      objectReference: {fileID: 1459373426}
+      objectReference: {fileID: 1554283970}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: dialogText
       value: 
       objectReference: {fileID: 1459373427}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: infoText
+      value: 
+      objectReference: {fileID: 1459373426}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: relationshipText
       value: 
       objectReference: {fileID: 1459373425}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1964199731}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: playerLocation
       value: 
       objectReference: {fileID: 548869050}
-    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
-      propertyPath: groupPrefab
-      value: 
-      objectReference: {fileID: 120648, guid: 92ec759c26d521e448d72162ccf54844, type: 2}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: zombieLocations.Array.data[0]
       value: 
@@ -1551,10 +1579,6 @@ Prefab:
       propertyPath: citizenLocations.Array.data[0]
       value: 
       objectReference: {fileID: 739923346}
-    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
-      propertyPath: citizenPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 126172, guid: 9271a4f08860ff047bbf9e9fe2cbaf3c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_IsPrefabParent: 0
@@ -1844,6 +1868,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 584a8ef4749c89745b7ae07f3ba7617f, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1964199731 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11423162, guid: a750e7f7104f184448b885ab201be74d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1459373424}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1992407881
 Prefab:
   m_ObjectHideFlags: 0
