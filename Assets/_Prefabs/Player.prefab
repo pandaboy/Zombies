@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11436824}
   - 114: {fileID: 11417458}
   - 114: {fileID: 11459978}
+  - 114: {fileID: 11489560}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -31,7 +32,7 @@ GameObject:
   - 4: {fileID: 463222}
   m_Layer: 0
   m_Name: Hand
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +49,7 @@ GameObject:
   - 23: {fileID: 2314790}
   m_Layer: 0
   m_Name: chr_hunter2
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,10 +63,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 455552}
   - 136: {fileID: 13623204}
-  - 114: {fileID: 11418242}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,7 @@ GameObject:
   - 4: {fileID: 404274}
   m_Layer: 0
   m_Name: OverHead
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,19 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorType: 0
---- !u!114 &11418242
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4a19a50da796445addd5c074773a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handCollectable: {fileID: 463222}
-  headCollectable: {fileID: 404274}
 --- !u!114 &11436824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +229,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b9c6997624dad43b9ad16c2620c8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11489560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4a19a50da796445addd5c074773a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCollectable: {fileID: 463222}
+  headCollectable: {fileID: 404274}
 --- !u!136 &13607260
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -313,10 +313,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: actorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

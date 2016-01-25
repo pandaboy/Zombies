@@ -10,6 +10,8 @@ namespace Zombies
     /// </summary>
     public class Actor : MonoBehaviour, INode<Actor>
     {
+        private ZombieGraph _graph;
+
         protected static int count = 0;
         public int Count
         {
@@ -35,6 +37,7 @@ namespace Zombies
 
         public virtual void Awake()
         {
+            _graph = ZombieGraph.Instance;
             ActorId = ++count;
         }
 
@@ -101,7 +104,18 @@ namespace Zombies
 
         public override string ToString()
         {
-            return "[ID: " + ActorId + "]";
+            return actorType + " " + ActorId;
+        }
+
+        public void PrintRelationships()
+        {
+            string relationships = "R:" + this.ActorId + " - ";
+            foreach (Connection conn in _graph.GetDirectConnections(this))
+            {
+                relationships += conn.Relationship.RelationshipType + "'s " + conn.To + "";
+            }
+
+            Debug.Log(relationships);
         }
     }
 }

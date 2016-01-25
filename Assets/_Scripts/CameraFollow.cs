@@ -3,20 +3,26 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
     public float smoothing = 5f;
 
-    private Vector3 offset;
-
-	void Start ()
+    private Transform _target;
+    public Transform Target
     {
-        offset = transform.position - target.position;
-	}
+        get {
+            return _target;
+        }
+
+        set {
+            _target = value;
+            offset = transform.position - _target.position;
+        }
+    }
+    private Vector3 offset;
 	
 	void FixedUpdate ()
     {
-        if (target) {
-            Vector3 targetCamPos = target.position + offset;
+        if (Target) {
+            Vector3 targetCamPos = Target.position + offset;
 
             // interpolate between camera's current position and it's target position
             transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);

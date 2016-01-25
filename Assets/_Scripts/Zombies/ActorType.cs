@@ -3,7 +3,8 @@
     public enum ActorType
     {
         AUTHORITY, // e.g. Police, Army, Priest (?), Fireman, Politician
-        DANGEROUS, // e.g. Thief, Hobo, Alien, Naked,
+        DANGEROUS, // e.g. Thief, Hobo, Alien, Naked
+        ITEM,      // e.g. Weapon, Animal
         NEUTRAL    // Everybody else
     }
 }

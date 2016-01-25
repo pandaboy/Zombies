@@ -7,12 +7,26 @@ using Zombies;
 public class GameController : MonoBehaviour
 {
     // UI.Text to display information to
-    public Text dialogText;
+    public Text dialogText; // displays actor dialog
+    public Text infoText;   // displays actor information (relationships)
+    public Text relationshipText; // displays the players relationships
 
     // Player information
     public GameObject playerPrefab;
     public Transform playerLocation;
     private GameObject player;
+    private Actor playerActor;
+
+    // Generic 'Actors' that other actors can be a member of
+    public GameObject authorityGroupPrefab;
+    private GameObject authorityGroup;
+    public GameObject AuthorityGroup
+    {
+        get
+        {
+            return authorityGroup;
+        }
+    }
 
     // Zombies, Items and Citizens
     public GameObject[] zombiePrefabs;
@@ -28,16 +42,38 @@ public class GameController : MonoBehaviour
     private int items = 0;
 
     // RelationshipGraph Stuff
-    private ZombieGraph graph = ZombieGraph.Instance;
+    private ZombieGraph _graph = ZombieGraph.Instance;
+    public ZombieGraph Graph
+    {
+        get
+        {
+            return this._graph;
+        }
+    }
 
     // relationships in use
     private Relationship trust = new Relationship(Zombies.RelationshipType.TRUST);
     private Relationship distrust = new Relationship(Zombies.RelationshipType.DISTRUST);
+    private Relationship stranger = new Relationship(Zombies.RelationshipType.STRANGER);
+    private Relationship member = new Relationship(Zombies.RelationshipType.MEMBER);
+
+    // Main Camera
+    private GameObject mainCamera;
+
+    void Awake()
+    {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
 
 	void Start ()
     {
+        // set the "authority" group
+        authorityGroup = Instantiate(authorityGroupPrefab) as GameObject;
+
         // spawn the player
         player = Instantiate(playerPrefab, playerLocation.position, playerLocation.rotation) as GameObject;
+        mainCamera.GetComponent<CameraFollow>().Target = player.transform;
+        playerActor = player.GetComponent<Actor>();
 
         // spawn the zombies
         if (zombiePrefabs.Length > 0 && zombieLocations.Length > 0)
@@ -55,14 +91,20 @@ public class GameController : MonoBehaviour
         if (citizenPrefabs.Length > 0 && citizenLocations.Length > 0)
         {
             for (int i = 0; i < citizenLocations.Length; i++) {
-                GameObject c = Instantiate(
+                GameObject cgo = Instantiate(
                     citizenPrefabs[(i % citizenPrefabs.Length)],
                     citizenLocations[i].position,
                     citizenLocations[i].rotation
                 ) as GameObject;
-                c.GetComponent<ClickCharacter>().GC = this;
-                c.GetComponent<Actor>();
-                graph.AddDirectConnection(new Connection(c, player, trust));
+
+                // create a 'stranger' relationship with this other character
+                _graph.AddDirectConnection(
+                    new Connection(
+                        cgo.GetComponent<Actor>(),
+                        authorityGroup.GetComponent<Actor>(),
+                        trust
+                    )
+                );
             }
         }
 
@@ -71,10 +113,18 @@ public class GameController : MonoBehaviour
         {
             for (int i = 0; i < itemLocations.Length; i++)
             {
-                Instantiate(
+                GameObject igo = Instantiate(
                     itemPrefabs[(i % itemPrefabs.Length)],
                     itemLocations[i].position,
                     itemLocations[i].rotation
+                ) as GameObject;
+                igo.GetComponent<Actor>().actorType = ActorType.ITEM;
+                _graph.AddDirectConnection(
+                    new Connection(
+                        igo.GetComponent<Actor>(),
+                        authorityGroup.GetComponent<Actor>(),
+                        member
+                    )
                 );
             }
         }
@@ -119,13 +169,18 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void buildRelationships()
-    {
-        // set up relationships using the ZombieGraph here
-    }
-
-    public void UpdateDialog(string msg)
+    public void SetDialogText(string msg)
     {
         dialogText.text = msg;
+    }
+
+    public void SetInfoText(string msg)
+    {
+        infoText.text = msg;
+    }
+
+    public void SetRelationshipText(string msg)
+    {
+        relationshipText.text = msg;
     }
 }
