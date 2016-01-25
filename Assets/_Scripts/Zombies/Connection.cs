@@ -20,6 +20,18 @@ namespace Zombies
             // ...
         }
 
+        public Connection(Actor from, Actor to, RelationshipType relationshipType)
+            : base(from, to, new Relationship(relationshipType))
+        {
+            // ...
+        }
+
+        public Connection(GameObject from, GameObject to, RelationshipType relationshipType)
+            : base(from.GetComponent<Actor>(), to.GetComponent<Actor>(), new Relationship(relationshipType))
+        {
+            // ...
+        }
+
         public override string ToString()
         {
             string history = From + " [";

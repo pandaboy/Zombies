@@ -8,21 +8,24 @@ public class CameraFollow : MonoBehaviour
     private Transform _target;
     public Transform Target
     {
-        get {
+        get
+        {
             return _target;
         }
 
-        set {
+        set
+        {
             _target = value;
-            offset = transform.position - _target.position;
+            _offset = transform.position - _target.position;
         }
     }
-    private Vector3 offset;
+
+    private Vector3 _offset;
 	
 	void FixedUpdate ()
     {
         if (Target) {
-            Vector3 targetCamPos = Target.position + offset;
+            Vector3 targetCamPos = Target.position + _offset;
 
             // interpolate between camera's current position and it's target position
             transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);

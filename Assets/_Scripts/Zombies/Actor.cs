@@ -11,13 +11,14 @@ namespace Zombies
     public class Actor : MonoBehaviour, INode<Actor>
     {
         private ZombieGraph _graph;
+        private GameController _gc;
 
-        protected static int count = 0;
+        protected static int _count = 0;
         public int Count
         {
             get
             {
-                return count;
+                return _count;
             }
         }
 
@@ -38,7 +39,9 @@ namespace Zombies
         public virtual void Awake()
         {
             _graph = ZombieGraph.Instance;
-            ActorId = ++count;
+            _gc = GameObject.FindGameObjectWithTag("GameController")
+                .GetComponent<GameController>();
+            ActorId = ++_count;
         }
 
         /// <summary>
@@ -66,14 +69,10 @@ namespace Zombies
         public virtual bool Equals(Actor other)
         {
             if (other == null)
-            {
                 return false;
-            }
 
             if (this.ActorId == other.ActorId)
-            {
                 return true;
-            }
 
             return false;
         }
@@ -81,20 +80,14 @@ namespace Zombies
         public override bool Equals(object o)
         {
             if (o == null)
-            {
                 return false;
-            }
 
             Actor actor = o as Actor;
 
             if (actor == null)
-            {
                 return false;
-            }
-            else
-            {
-                return Equals(actor);
-            }
+
+            return Equals(actor);
         }
 
         public override int GetHashCode()
@@ -110,12 +103,26 @@ namespace Zombies
         public void PrintRelationships()
         {
             string relationships = "R:" + this.ActorId + " - ";
-            foreach (Connection conn in _graph.GetDirectConnections(this))
-            {
+            foreach (Connection conn in _graph.GetDirectConnections(this)) {
                 relationships += conn.Relationship.RelationshipType + "'s " + conn.To + "";
             }
 
+            // print to the console
             Debug.Log(relationships);
+        }
+
+        // updates the UI with this Actors Direct Relationships
+        public void DisplayRelationships(bool player = false)
+        {
+            string relationshipsMsg = "";
+            foreach (Connection conn in _graph.GetDirectConnections(this)) {
+                relationshipsMsg += conn.Relationship.RelationshipType + "'s " + conn.To + "\n";
+            }
+
+            if (player)
+                _gc.SetRelationshipText(relationshipsMsg);
+            else
+                _gc.SetInfoText(relationshipsMsg);
         }
     }
 }

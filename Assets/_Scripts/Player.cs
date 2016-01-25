@@ -19,24 +19,12 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "NPC")
-        {
+        if (other.gameObject.tag == "NPC") {
             Actor otherActor = other.gameObject.GetComponent<Actor>();
             // create a 'stranger' relationship with this other character
-            _graph.AddDirectConnection(new Connection(_actor, otherActor, new Relationship(RelationshipType.STRANGER)));
+            _graph.AddDirectConnection(new Connection(_actor, otherActor, RelationshipType.STRANGER));
 
-            DisplayRelationships();
+            _actor.DisplayRelationships(true);
         }
-    }
-
-    public void DisplayRelationships()
-    {
-        string relationshipsMsg = "";
-        foreach (Connection conn in _graph.GetDirectConnections(_actor))
-        {
-            relationshipsMsg += conn.Relationship.RelationshipType + "'s " + conn.To + "\n";
-        }
-
-        _gc.SetRelationshipText(relationshipsMsg);
     }
 }

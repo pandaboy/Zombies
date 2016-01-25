@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// turns the character into a zombie
 public class Zombify : MonoBehaviour
 {
     public GameObject zombieModel;
@@ -7,8 +8,7 @@ public class Zombify : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Zombie")
-        {
+        if (other.tag == "Zombie") {
             // update tag
             this.tag = "Zombie";
 

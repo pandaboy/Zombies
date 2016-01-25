@@ -39,21 +39,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e27ac9ad093f2642ac9e8a6ccab64c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogText: {fileID: 0}
+  infoText: {fileID: 0}
+  relationshipText: {fileID: 0}
+  playerPrefab: {fileID: 103340, guid: 549a2e56b7d691a4ca1ab2c099fd88a0, type: 2}
+  playerLocation: {fileID: 0}
+  authorityGroupPrefab: {fileID: 120648, guid: 92ec759c26d521e448d72162ccf54844, type: 2}
   zombiePrefabs:
   - {fileID: 182880, guid: a06ca80b7aa601c4ea330f3e72d08f13, type: 2}
-  citizenPrefabs:
-  - {fileID: 155896, guid: f8958fa3b6f4a074385732831177ad74, type: 2}
   zombieLocations:
   - {fileID: 0}
+  itemPrefabs:
+  - {fileID: 174902, guid: 5d4c7fccd9688864bb0b1ea226ea6418, type: 2}
+  itemLocations:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  citizenPrefabs:
+  - {fileID: 100472, guid: 98b6aa5d1e1e57849ab38e58eaf13913, type: 2}
   citizenLocations:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

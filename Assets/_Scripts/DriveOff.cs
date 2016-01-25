@@ -4,7 +4,20 @@ using System.Collections;
 public class DriveOff : MonoBehaviour
 {
     public float speed = 10.0f;
+    
     private bool drive_off;
+    public bool Drive_Off
+    {
+        get
+        {
+            return drive_off;
+        }
+
+        set
+        {
+            drive_off = value;
+        }
+    }
 
 	void Start ()
     {
@@ -13,8 +26,7 @@ public class DriveOff : MonoBehaviour
 	
 	void Update ()
     {
-        if (drive_off)
-        {
+        if (drive_off) {
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 	}
@@ -26,8 +38,7 @@ public class DriveOff : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
-        {
+        if(other.gameObject.tag == "Player") {
             Escape();
             Destroy(other.gameObject);
         }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+// will move the agent to designated points of interest
 public class PointsOfInterest : MonoBehaviour
 {
     public Transform[] points;
@@ -18,22 +18,17 @@ public class PointsOfInterest : MonoBehaviour
     void Update ()
     {
         if (points.Length != 0)
-        {
             GoToNextPoint();
-        }
 	}
 
     void GoToNextPoint ()
     {
         if (agent.destination == Vector3.zero)
-        {
             agent.destination = points[current].position;
-        }
 
         // if we are close to the destination,
         // update to target next point of interest
-        if (agent.remainingDistance < 0.5f)
-        {
+        if (agent.remainingDistance < 0.5f) {
             // update to next location
             current = (current + 1) % points.Length;
             agent.destination = points[current].position;

@@ -44,14 +44,10 @@ namespace Zombies
         public bool Equals(Relationship other)
         {
             if (other == null)
-            {
                 return false;
-            }
 
             if (this.RelationshipType == other.RelationshipType)
-            {
                 return true;
-            }
 
             return false;
         }

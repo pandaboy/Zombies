@@ -11,7 +11,6 @@ GameObject:
   - 54: {fileID: 5490240}
   - 195: {fileID: 19516268}
   - 114: {fileID: 11448708}
-  - 114: {fileID: 11411236}
   - 114: {fileID: 11459826}
   - 114: {fileID: 11407958}
   - 135: {fileID: 13587214}
@@ -152,18 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f496abd37f9eaaf49b12bfc207683549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11411236
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f2a9a692cb8ecf4bb4368460442d3cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  safety: 1
 --- !u!114 &11432818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70038e288753734a8fe3b5dc66382fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actorType: 2
+  actorType: 3
 --- !u!114 &11475770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,9 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fb8b707a9eaf44bc6b85a347dffad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsOfInterest:
-  - {fileID: 0}
-  - {fileID: 0}
+  points: []
 --- !u!135 &13587214
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -287,6 +272,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: actorType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

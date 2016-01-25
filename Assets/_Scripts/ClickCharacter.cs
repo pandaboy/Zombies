@@ -23,20 +23,9 @@ public class ClickCharacter : MonoBehaviour
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
                 if (hit.transform.tag == "NPC") {
-                    DisplayRelationships();
+                    _actor.DisplayRelationships();
                 }
             }
         }
-    }
-
-    public void DisplayRelationships()
-    {
-        string relationshipsMsg = "Character Info\n";
-        foreach (Connection conn in _graph.GetDirectConnections(_actor))
-        {
-            relationshipsMsg += conn.Relationship.RelationshipType + "'s " + conn.To + "\n";
-        }
-
-        _gc.SetInfoText(relationshipsMsg);
     }
 }

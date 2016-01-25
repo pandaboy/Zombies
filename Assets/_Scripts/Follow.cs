@@ -38,14 +38,13 @@ public class Follow : MonoBehaviour
 
     void Awake()
     {
-        this._agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if (this._target != null && this._canFollow)
-        {
-            this._agent.destination = this._target.transform.position;
+        if (_target != null && _canFollow) {
+            _agent.destination = _target.transform.position;
         }
     }
 }

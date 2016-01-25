@@ -442,6 +442,11 @@ namespace Zombies
             return false;
         }
 
+        public bool HaveRelationship(Actor actor, Actor other, RelationshipType relationshipType)
+        {
+            return HaveRelationship(actor, other, new Relationship(relationshipType));
+        }
+
         public bool HaveRelationshipHistory(Actor actor, Actor other, Relationship relationship)
         {
             if (ActorHasConnection(actor, actor, other))

@@ -9,15 +9,6 @@ public class Collect : MonoBehaviour
     public Transform headCollectable;   // carried overhead
 
     private ZombieGraph _graph = ZombieGraph.Instance;
-    private Relationship trust = new Relationship(Zombies.RelationshipType.TRUST);
-
-    // referecence to player game object
-    // private GameObject player;
-
-    public void Start()
-    {
-        // player = transform.parent.gameObject;
-    }
 
     public void placeItem(GameObject item, CollectableType type)
     {
@@ -37,10 +28,13 @@ public class Collect : MonoBehaviour
         item.transform.localRotation = Quaternion.identity;
 
         // Add a Direct Connection to the item collected
-        _graph.AddDirectConnection(new Connection(gameObject, item, trust));
-
-        // update the UI with new relationships
-        gameObject.GetComponent<Player>().DisplayRelationships();
-        item.GetComponent<Actor>().PrintRelationships();
+        // - the player will trust items that they pick up that they can
+        //   carry in hand, but distrust items that have to be carried overhead (for safety)
+        if (type == CollectableType.HAND) {
+            _graph.AddDirectConnection(new Connection(gameObject, item, RelationshipType.TRUST));
+        }
+        else {
+            _graph.AddDirectConnection(new Connection(gameObject, item, RelationshipType.DISTRUST));
+        }
     }
 }
