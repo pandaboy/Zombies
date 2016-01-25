@@ -10,8 +10,8 @@ namespace Zombies
     /// </summary>
     public class Actor : MonoBehaviour, INode<Actor>
     {
-        private ZombieGraph _graph;
-        private GameController _gc;
+        protected ZombieGraph _graph;
+        protected GameController _gc;
 
         protected static int _count = 0;
         public int Count
@@ -22,7 +22,7 @@ namespace Zombies
             }
         }
 
-        private int _ActorId;
+        protected int _ActorId;
         public int ActorId
         {
             get
@@ -39,7 +39,8 @@ namespace Zombies
         public virtual void Awake()
         {
             _graph = ZombieGraph.Instance;
-            _gc = GameObject.FindGameObjectWithTag("GameController")
+            _gc = GameObject
+                .FindGameObjectWithTag("GameController")
                 .GetComponent<GameController>();
             ActorId = ++_count;
         }

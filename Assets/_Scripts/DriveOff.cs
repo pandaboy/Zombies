@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using Zombies;
 
 public class DriveOff : MonoBehaviour
 {
+    private ZombieGraph _graph;
+    
     public float speed = 10.0f;
     
     private bool drive_off;
@@ -21,6 +24,7 @@ public class DriveOff : MonoBehaviour
 
 	void Start ()
     {
+        _graph = ZombieGraph.Instance;
         drive_off = false;
 	}
 	

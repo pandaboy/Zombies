@@ -624,7 +624,7 @@ Prefab:
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: citizenPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 126172, guid: 9271a4f08860ff047bbf9e9fe2cbaf3c, type: 2}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: groupPrefab
       value: 

@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using Zombies;
 
-public class Citizen : MonoBehaviour
+public class Citizen : Actor
 {
-    private ZombieGraph _graph;
     private Follow _follow;
-    private Actor _actor;
-    private GameController _gc;
 
     void Start()
     {
-        _graph = ZombieGraph.Instance;
-
         _follow = GetComponent<Follow>();
-        _actor = GetComponent<Actor>();
-        _gc = GameObject
-            .FindGameObjectWithTag("GameController")
-            .GetComponent<GameController>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,11 +23,11 @@ public class Citizen : MonoBehaviour
         Actor otherActor = other.GetComponent<Actor>();
 
         // Get the direct connection from this actor to the other
-        Connection conn = _graph.GetConnection(_actor, otherActor);
+        Connection conn = _graph.GetConnection(this, otherActor);
 
         if (conn == null) {
             // initially distrusts the player
-            _graph.AddDirectConnection(new Connection(_actor, otherActor, RelationshipType.DISTRUST));
+            _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.DISTRUST));
 
             // put some dialog
             _gc.SetDialogText("I don't know you!");
@@ -61,7 +52,7 @@ public class Citizen : MonoBehaviour
             // get the direct relationships to this other actor
             if (_graph.HaveRelationship(actor, _gc.Group.GetComponent<Actor>(), RelationshipType.MEMBER)) {
                 // Actor agrees to become a follower
-                _graph.AddDirectConnection(new Connection(_actor, otherActor, RelationshipType.FOLLOWER));
+                _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.FOLLOWER));
 
                 _follow.Target = other;
                 _follow.CanFollow = true;

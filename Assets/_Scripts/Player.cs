@@ -3,25 +3,16 @@ using UnityEngine.UI;
 using Zombies;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour
+public class Player : Actor
 {
-    private GameController _gc;
-    private ZombieGraph _graph;
     private Damage _damage;
-    private Actor _actor;
 
     void Start()
     {
-        _graph = ZombieGraph.Instance;
-        _actor = GetComponent<Actor>();
         _damage = GetComponent<Damage>();
-        
-        _gc = GameObject
-            .FindGameObjectWithTag("GameController")
-            .GetComponent<GameController>();
 
         // set the player health
-        _gc.SetHealthText(_damage.health.ToString());
+        this._gc.SetHealthText(_damage.health.ToString());
     }
 
     void OnTriggerEnter(Collider other)
@@ -29,17 +20,16 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "NPC") {
             Actor otherActor = other.gameObject.GetComponent<Actor>();
             // create a 'stranger' relationship with this other character
-            _graph.AddDirectConnection(new Connection(_actor, otherActor, RelationshipType.STRANGER));
+            _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.STRANGER));
 
-            _actor.DisplayRelationships(true);
+            DisplayRelationships(true);
         }
     }
 
     void Update()
     {
         // check if health is below 0
-        if (_damage.health <= 0)
-        {
+        if (_damage.health <= 0) {
             // display title text
             _gc.SetTitleText("YOU ARE A ZOMBIE");
         }
