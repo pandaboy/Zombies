@@ -12,6 +12,7 @@ GameObject:
   - 195: {fileID: 19591568}
   - 135: {fileID: 13549320}
   - 114: {fileID: 11426474}
+  - 114: {fileID: 11469738}
   m_Layer: 0
   m_Name: Zombie 1
   m_TagString: Zombie
@@ -59,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182880}
   m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
-  m_LocalPosition: {x: -15, y: .200000003, z: -3}
+  m_LocalPosition: {x: -3.1099999, y: .200000003, z: -7.46999979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 444726}
@@ -147,7 +148,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1f3017cf229c349bf81132157636c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: Citizen,Player
+  follow: NPC,Player
+--- !u!114 &11469738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad34938dbdafe7f478efbc6f4ee88f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  distanceToDamage: 1.10000002
+  timeBetweenAttacks: .5
 --- !u!135 &13549320
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -158,8 +173,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: .5, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: .75, z: 1.5}
 --- !u!136 &13618236
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -181,11 +196,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 182880}
   m_Enabled: 1
   m_Radius: .5
-  m_Speed: 1
+  m_Speed: .5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -199,7 +214,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: follow
+      value: NPC,Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182880}

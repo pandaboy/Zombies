@@ -6,22 +6,35 @@ public class Zombify : MonoBehaviour
     public GameObject zombieModel;
     public GameObject characterModel;
 
-    public void OnTriggerEnter(Collider other)
+    public void TurnToZombie()
     {
-        if (other.tag == "Zombie") {
-            // update tag
-            this.tag = "Zombie";
+        Chase chase = GetComponent<Chase>();
+        Citizen citizen = GetComponent<Citizen>();
+        Player player = GetComponent<Player>();
+        ClickToMoveTo ctmt = GetComponent<ClickToMoveTo>();
 
-            // update follow tags
-            GetComponent<Chase>().follow = "Citizen,Player";
-
-            // load zombieModel
-            characterModel.SetActive(false);
-            zombieModel.SetActive(true);
-
-            // Add "Chase" script
-            GetComponent<Chase>().enabled = true;
-            GetComponent<Citizen>().enabled = false;
+        // update the tag
+        gameObject.tag = "Zombie";
+        
+        // enable the chase component if present
+        if(chase) {
+            chase.follow = "NPC,Player";
+            chase.enabled = true;
         }
+
+        // disable the citizen component if present
+        if(citizen) {
+            citizen.enabled = false;
+        }
+
+        // disable the player component if present
+        if(player) {
+            player.enabled = false;
+            ctmt.enabled = false;
+        }
+
+        // load the zombieModel
+        characterModel.SetActive(false);
+        zombieModel.SetActive(true);
     }
 }

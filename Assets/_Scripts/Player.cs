@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Zombies;
 using System.Collections.Generic;
 
@@ -6,15 +7,21 @@ public class Player : MonoBehaviour
 {
     private GameController _gc;
     private ZombieGraph _graph;
+    private Damage _damage;
     private Actor _actor;
 
-    void Awake()
+    void Start()
     {
         _graph = ZombieGraph.Instance;
+        _actor = GetComponent<Actor>();
+        _damage = GetComponent<Damage>();
+        
         _gc = GameObject
             .FindGameObjectWithTag("GameController")
             .GetComponent<GameController>();
-        _actor = GetComponent<Actor>();
+
+        // set the player health
+        _gc.SetHealthText(_damage.health.ToString());
     }
 
     void OnTriggerEnter(Collider other)
@@ -26,5 +33,18 @@ public class Player : MonoBehaviour
 
             _actor.DisplayRelationships(true);
         }
+    }
+
+    void Update()
+    {
+        // check if health is below 0
+        if (_damage.health <= 0)
+        {
+            // display title text
+            _gc.SetTitleText("YOU ARE A ZOMBIE");
+        }
+
+        // update UI with new health value
+        _gc.SetHealthText(_damage.health.ToString());
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class Chase : MonoBehaviour
 {
     // Comma-separated list of tags the agent will follow
-    public string follow = "Citizen";
+    public string follow = "NPC";
 
     private string[] _targetTags;
     

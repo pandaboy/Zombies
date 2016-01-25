@@ -7,9 +7,11 @@ using Zombies;
 public class GameController : MonoBehaviour
 {
     // UI.Text to display information to
+    public Text titleText; // game title text
     public Text dialogText; // displays actor dialog
     public Text infoText;   // displays actor information (relationships)
     public Text relationshipText; // displays the players relationships
+    public Text healthText; // displays the players health
 
     // Player stuff
     public GameObject playerPrefab;
@@ -165,6 +167,11 @@ public class GameController : MonoBehaviour
         }
 	}
 
+    public void SetTitleText(string msg)
+    {
+        titleText.text = msg;
+    }
+
     public void SetDialogText(string msg)
     {
         dialogText.text = msg;
@@ -178,5 +185,10 @@ public class GameController : MonoBehaviour
     public void SetRelationshipText(string msg)
     {
         relationshipText.text = msg;
+    }
+
+    public void SetHealthText(string msg)
+    {
+        healthText.text = msg;
     }
 }

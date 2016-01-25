@@ -11,10 +11,13 @@ public class Citizen : MonoBehaviour
 
     void Start()
     {
-        this._follow = GetComponent<Follow>();
-        this._actor = GetComponent<Actor>();
-        this._graph = ZombieGraph.Instance;
-        this._gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        _graph = ZombieGraph.Instance;
+
+        _follow = GetComponent<Follow>();
+        _actor = GetComponent<Actor>();
+        _gc = GameObject
+            .FindGameObjectWithTag("GameController")
+            .GetComponent<GameController>();
     }
 
     void OnTriggerEnter(Collider other)

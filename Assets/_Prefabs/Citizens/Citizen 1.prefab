@@ -25,11 +25,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 410708}
   - 54: {fileID: 5477062}
-  - 135: {fileID: 13558324}
   - 195: {fileID: 19566360}
+  - 135: {fileID: 13558324}
+  - 114: {fileID: 11487306}
   - 114: {fileID: 11452676}
+  - 114: {fileID: 11466632}
+  - 114: {fileID: 11426530}
+  - 114: {fileID: 11492702}
   - 114: {fileID: 11426640}
-  - 114: {fileID: 11492328}
   m_Layer: 0
   m_Name: Citizen 1
   m_TagString: NPC
@@ -199,6 +202,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &11426530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5a8cb42774c0345bcd889f716053b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11426640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f496abd37f9eaaf49b12bfc207683549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11492328
+--- !u!114 &11466632
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -231,10 +245,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 155896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1f3017cf229c349bf81132157636c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c2f38d8a0b83aa4bbe22b73c39f5472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: Player
+--- !u!114 &11487306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70038e288753734a8fe3b5dc66382fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorType: 3
+--- !u!114 &11492702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1fb8b707a9eaf44bc6b85a347dffad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
 --- !u!135 &13558324
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -286,7 +323,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: actorType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155896}
