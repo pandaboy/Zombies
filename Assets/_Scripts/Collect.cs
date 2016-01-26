@@ -10,7 +10,16 @@ public class Collect : MonoBehaviour
     public Transform handCollectable;   // carried in hand
     public Transform headCollectable;   // carried overhead
 
-    protected ZombieGraph _graph = ZombieGraph.Instance;
+    protected ZombieGraph _graph;
+    protected GameController _gc;
+
+    void Start()
+    {
+        _graph = ZombieGraph.Instance;
+        _gc = GameObject
+            .FindGameObjectWithTag("GameController")
+            .GetComponent<GameController>();
+    }
 
     public void placeItem(GameObject item, CollectableType type)
     {
@@ -38,5 +47,8 @@ public class Collect : MonoBehaviour
         else {
             _graph.AddDirectConnection(new Connection(gameObject, item, RelationshipType.DISTRUST));
         }
+
+        // increase the number of items collected
+        _gc.Items++;
     }
 }

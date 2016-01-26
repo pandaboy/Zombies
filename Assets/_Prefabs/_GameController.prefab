@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 418536}
   - 114: {fileID: 11485760}
-  - 114: {fileID: 11429842}
   m_Layer: 0
   m_Name: _GameController
   m_TagString: GameController
@@ -29,18 +28,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11429842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42d3b9f7b02bf5f4a8cc83a003ffff73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextLevel: level1
 --- !u!114 &11485760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,6 +46,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   playerPrefab: {fileID: 103340, guid: 549a2e56b7d691a4ca1ab2c099fd88a0, type: 2}
   playerLocation: {fileID: 0}
+  exitPrefab: {fileID: 0}
+  exitLocation: {fileID: 0}
   groupPrefab: {fileID: 120648, guid: 92ec759c26d521e448d72162ccf54844, type: 2}
   zombiePrefabs:
   - {fileID: 182880, guid: a06ca80b7aa601c4ea330f3e72d08f13, type: 2}
@@ -72,6 +61,9 @@ MonoBehaviour:
   - {fileID: 126172, guid: 9271a4f08860ff047bbf9e9fe2cbaf3c, type: 2}
   citizenLocations:
   - {fileID: 0}
+  nextLevel: 
+  nextLevelButton: {fileID: 0}
+  restartLevelButton: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

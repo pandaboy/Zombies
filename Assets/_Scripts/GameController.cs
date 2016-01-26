@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public Text infoText;           // displays actor information (relationships)
     public Text relationshipText;   // displays the players relationships
     public Text healthText;         // displays the players health
+    public Text itemsText;          // displays the number of items collected
+    public Text citizensText;       // displays the number of citizes saved
 
     // Player stuff
     public GameObject    playerPrefab;
@@ -72,6 +74,7 @@ public class GameController : MonoBehaviour
         set
         {
             _rescued = value;
+            citizensText.text = "Saved: " + _rescued;
         }
 
         get
@@ -86,6 +89,7 @@ public class GameController : MonoBehaviour
         set
         {
             _items = value;
+            itemsText.text = "Items: " + _items;
         }
 
         get

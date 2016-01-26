@@ -60,7 +60,8 @@ public class Citizen : Actor
                 _follow.Target = other;
                 _follow.CanFollow = true;
                 
-                _gc.SetDialogText("I don't know you! But I trust " + actor + ", so I'll following you!");
+                _gc.SetDialogText("I don't know you!\nBut I trust " + actor + ", so I'll following you!");
+                _gc.Rescued++;
             }
         }
     }
