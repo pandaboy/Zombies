@@ -19,6 +19,10 @@ public class GameController : MonoBehaviour
     private GameObject player;
     private Actor playerActor;
 
+    // Exit stuff
+    public GameObject exitPrefab;
+    public Transform exitLocation;
+
     // Generic 'Actors' that other actors can be a member of
     // - we use this to define a relationship to a group
     public GameObject groupPrefab;
@@ -120,6 +124,10 @@ public class GameController : MonoBehaviour
         mainCamera.GetComponent<CameraFollow>().Target = player.transform;
         playerActor = player.GetComponent<Actor>();
 
+        // spawn the exit vehicle
+        GameObject exitVehicle = Instantiate(exitPrefab, exitLocation.position, exitLocation.rotation) as GameObject;
+        exitVehicle.GetComponent<DriveOff>().Player = player;
+
         // spawn the zombies
         if (zombiePrefabs.Length > 0 && zombieLocations.Length > 0) {
             for(int i = 0; i < zombieLocations.Length; i++) {
@@ -176,7 +184,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            DisplayDeathScreen();
+            DisplayEndScreen("YOU ARE A ZOMBIE");
         }
     }
 
@@ -215,8 +223,9 @@ public class GameController : MonoBehaviour
         Application.LoadLevel(Application.loadedLevelName);
     }
 
-    public void DisplayDeathScreen()
+    public void DisplayEndScreen(string titleMsg = "Game Over")
     {
+        titleText.text = titleMsg;
         titleText.enabled = true;
         nextLevelButton.GetComponentInChildren<Text>().enabled = true;
         restartLevelButton.GetComponentInChildren<Text>().enabled = true;

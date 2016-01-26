@@ -31,11 +31,17 @@ public class Player : Actor
         // check if health is below 0
         if (_damage.health <= 0) {
             // display title text
-            _gc.SetTitleText("YOU ARE A ZOMBIE");
-            _gc.DisplayDeathScreen();
+            _gc.DisplayEndScreen("YOU ARE A ZOMBIE");
         }
 
         // update UI with new health value
         _gc.SetHealthText(_damage.health.ToString());
     }
+
+    public IList<Actor> GetFollowers()
+    {
+        return _graph.WithRelationshipTo(this, new Relationship(RelationshipType.FOLLOWER));
+    }
+
+
 }

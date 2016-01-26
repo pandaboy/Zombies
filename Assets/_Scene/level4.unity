@@ -699,6 +699,14 @@ Prefab:
       propertyPath: restartLevelButton
       value: 
       objectReference: {fileID: 1750598154}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: exitLocation
+      value: 
+      objectReference: {fileID: 2054409693}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: exitPrefab
+      value: 
+      objectReference: {fileID: 140934, guid: f12861dfa50f9ee4291eb54956296d24, type: 2}
     m_RemovedComponents:
     - {fileID: 11429842, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
@@ -1659,6 +1667,7 @@ Transform:
   - {fileID: 1465859390}
   - {fileID: 163025539}
   - {fileID: 1003777403}
+  - {fileID: 2054409693}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1 &1203640953
@@ -2753,6 +2762,33 @@ Transform:
   - {fileID: 813173222}
   m_Father: {fileID: 731252133}
   m_RootOrder: 1
+--- !u!1 &2054409692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2054409693}
+  m_Layer: 0
+  m_Name: Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2054409693
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2054409692}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: 12, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1143323514}
+  m_RootOrder: 3
 --- !u!1 &2112048679
 GameObject:
   m_ObjectHideFlags: 0
