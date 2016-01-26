@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Zombies;
+using System.Collections.Generic;
 
+/// <summary>
+/// Manages damage done to the gameObject by another.
+/// </summary>
 public class DriveOff : MonoBehaviour
 {
     public float speed = 10.0f;
 
-    private ZombieGraph _graph;
-    private GameController _gc;
+    protected ZombieGraph    _graph;
+    protected GameController _gc;
 
-    private Player _player;
-    private GameObject _playerGO;
+    protected Player _player;
+    protected GameObject _playerGO;
     public GameObject Player
     {
         set
@@ -24,24 +27,24 @@ public class DriveOff : MonoBehaviour
             return _playerGO;
         }
     }
-    
-    private bool drive_off;
+
+    protected bool _driveOff;
     public bool Drive_Off
     {
         get
         {
-            return drive_off;
+            return _driveOff;
         }
 
         set
         {
-            drive_off = value;
+            _driveOff = value;
         }
     }
 
 	void Start ()
     {
-        drive_off = false;
+        Drive_Off = false;
         _graph = ZombieGraph.Instance;
         _gc = GameObject
             .FindGameObjectWithTag("GameController")
@@ -50,7 +53,7 @@ public class DriveOff : MonoBehaviour
 	
 	void Update ()
     {
-        if (drive_off) {
+        if (Drive_Off) {
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 	}
@@ -58,7 +61,7 @@ public class DriveOff : MonoBehaviour
     public void Escape()
     {
         // trigger the car to drive off
-        drive_off = true;
+        Drive_Off = true;
 
         // get rid of the player
         Destroy(_playerGO);

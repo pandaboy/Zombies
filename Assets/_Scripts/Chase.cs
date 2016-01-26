@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Instructs NavMeshAgent to chase the Target
+/// </summary>
 public class Chase : MonoBehaviour
 {
     // Comma-separated list of tags the agent will follow
     public string follow = "NPC";
 
-    private string[] _targetTags;
-    
-    private GameObject _target;
+    protected string[] _targetTags;
+
+    protected GameObject _target;
     public GameObject Target
     {
         get

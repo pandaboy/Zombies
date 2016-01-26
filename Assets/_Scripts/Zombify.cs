@@ -1,39 +1,58 @@
 ﻿using UnityEngine;
 
-// turns the character into a zombie
+/// <summary>
+/// Will turn an Actor into a zombie (must have a zombieModel and a characterModel)
+/// </summary>
 public class Zombify : MonoBehaviour
 {
-    public GameObject zombieModel;
-    public GameObject characterModel;
+    public GameObject zombieModel;      // stores the Zombie Model
+    public GameObject characterModel;   // stores the Character Model
 
+    protected Chase         _chase;
+    protected Citizen       _citizen;
+    protected Player        _player;
+    protected ClickToMoveTo _clickToMoveTo;
+
+    void Start()
+    {
+        _chase         = GetComponent<Chase>();
+        _citizen       = GetComponent<Citizen>();
+        _player        = GetComponent<Player>();
+        _clickToMoveTo = GetComponent<ClickToMoveTo>();
+    }
+
+    /// <summary>
+    /// Turns an Actor into a Zombie.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks>
+    /// Actor's are turned into Zombies by disabling active pieces and swapping
+    /// the actor model to a zombie model
+    /// </remarks>
     public void TurnToZombie()
     {
-        Chase chase = GetComponent<Chase>();
-        Citizen citizen = GetComponent<Citizen>();
-        Player player = GetComponent<Player>();
-        ClickToMoveTo ctmt = GetComponent<ClickToMoveTo>();
 
         // update the tag
         gameObject.tag = "Zombie";
         
         // enable the chase component if present
-        if(chase) {
-            chase.follow = "NPC,Player";
-            chase.enabled = true;
+        if (_chase) {
+            _chase.follow  = "NPC,Player";
+            _chase.enabled = true;
         }
 
         // disable the citizen component if present
-        if(citizen) {
-            citizen.enabled = false;
+        if (_citizen) {
+            _citizen.enabled = false;
         }
 
         // disable the player component if present
-        if(player) {
-            player.enabled = false;
-            ctmt.enabled = false;
+        if (_player) {
+            _player.enabled        = false;
+            _clickToMoveTo.enabled = false;
         }
 
-        // load the zombieModel
+        // swap the active models
         characterModel.SetActive(false);
         zombieModel.SetActive(true);
     }

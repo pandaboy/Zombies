@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Camera follows the target and maintains it's distance
+/// to the target.
+/// </summary>
 public class CameraFollow : MonoBehaviour
 {
     public float smoothing = 5f;
 
-    private Transform _target;
+    protected Transform _target;
     public Transform Target
     {
         get

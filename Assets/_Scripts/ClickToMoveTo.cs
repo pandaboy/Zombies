@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Sets the NavMeshAgent's destination to where the user clicked.
+/// </summary>
 public class ClickToMoveTo : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
     void Start()
     {

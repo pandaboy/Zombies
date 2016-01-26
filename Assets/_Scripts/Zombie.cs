@@ -1,64 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Zombies;
 
-public class Zombie : MonoBehaviour 
+/// <summary>
+/// Manages Zombie characters
+/// </summary>
+public class Zombie : Actor 
 {
-    public int damageAmount = 1;
-    public float distanceToDamage = 1.1f;
+    public int damageAmount         = 1;
+    public float distanceToDamage   = 1.1f;
     public float timeBetweenAttacks = 0.5f;
 
-    private NavMeshAgent _agent;
-
-    // indicates if we are attacking other character
-    private bool inRange;
-    private GameObject target;
-    private Damage targetHealth;
-    private float timer;
+    protected NavMeshAgent _agent;
+    protected bool         _inRange;
+    protected Damage       _targetHealth;
+    protected float        _timer;
 
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
-        inRange = false;
-        timer = 0f;
+        _agent      = GetComponent<NavMeshAgent>();
+        _inRange    = false;
+        _timer      = 0f;
     }
 
     void Update()
     {
-        timer += Time.time;
+        _timer += Time.time;
 
-        if (timer >= timeBetweenAttacks && inRange && targetHealth.health > 0)
-        {
+        if (_timer >= timeBetweenAttacks && _inRange && _targetHealth.health > 0) {
             Attack();
         }
     }
 
     void Attack()
     {
-        timer = 0f;
+        _timer = 0f;
 
-        if (targetHealth.health >= 0)
-        {
-            targetHealth.TakeDamage(damageAmount);
+        if (_targetHealth.health >= 0) {
+            _targetHealth.TakeDamage(damageAmount);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC")
-        {
-            inRange = true;
-            target = other.gameObject;
-            targetHealth = target.GetComponent<Damage>();
-            targetHealth.ParticleSystem.Play();
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC") {
+            _inRange = true;
+            _targetHealth = other.gameObject.GetComponent<Damage>();
+            _targetHealth.ParticleSystem.Play();
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC")
-        {
-            inRange = false;
-            targetHealth.ParticleSystem.Stop();
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC") {
+            _inRange = false;
+            _targetHealth.ParticleSystem.Stop();
         }
     }
 }

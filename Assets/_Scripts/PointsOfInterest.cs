@@ -1,37 +1,47 @@
 ﻿using UnityEngine;
 
-// will move the agent to designated points of interest
+/// <summary>
+/// Moves the NavMeshAgent to pre-designated points of interest
+/// </summary>
 public class PointsOfInterest : MonoBehaviour
 {
-    public Transform[] points;
+    public Transform[] points;      // points of interest to navigate between
 
-    private int current = 0;
-    private NavMeshAgent agent;
+    protected int _current = 0;     // current point of interest
+    protected NavMeshAgent _agent;
 
     void Start ()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
-        agent.stoppingDistance = 0.5f;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.autoBraking      = false; // no slowing down near destinations
+        _agent.stoppingDistance = 0.5f;  // distance before switching current
 	}
 	
     void Update ()
     {
-        if (points.Length != 0)
+        // provided we have places to go, go to them
+        if (points.Length != 0) {
             GoToNextPoint();
+        }
 	}
 
+    /// <summary>
+    /// Moves character to current point of interest
+    /// </summary>
+    /// <returns></returns>
     void GoToNextPoint ()
     {
-        if (agent.destination == Vector3.zero)
-            agent.destination = points[current].position;
+        // if we have no destination set, set the first point as the destination
+        if (_agent.destination == Vector3.zero) {
+            _agent.destination = points[_current].position;
+        }
 
         // if we are close to the destination,
         // update to target next point of interest
-        if (agent.remainingDistance < 0.5f) {
-            // update to next location
-            current = (current + 1) % points.Length;
-            agent.destination = points[current].position;
+        if (_agent.remainingDistance < 0.5f) {
+            // update to next location, loop back to the first point when done.
+            _current = (_current + 1) % points.Length;
+            _agent.destination = points[_current].position;
         }
     }
 }

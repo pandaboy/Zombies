@@ -1,5 +1,8 @@
-﻿namespace Zombies.Collectables
+﻿namespace Zombies
 {
+    /// <summary>
+    /// Types of collectable items
+    /// </summary>
     public enum CollectableType
     {
         HAND, // items that can be held in the arm 'slot'

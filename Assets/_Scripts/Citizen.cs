@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Zombies;
+using System.Collections.Generic;
 
+/// <summary>
+/// Manages Citizen Actors.
+/// </summary>
 public class Citizen : Actor
 {
-    private Follow _follow;
+    protected Follow _follow;
 
     void Start()
     {

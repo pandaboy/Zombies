@@ -6,14 +6,21 @@ using Zombies;
 namespace Zombies
 {
     /// <summary>
-    /// Basic Actor implementation
+    /// Base class for the player and citizens, plugs into the ZombieGraph
     /// </summary>
     public class Actor : MonoBehaviour, INode<Actor>
     {
         protected ZombieGraph _graph;
         protected GameController _gc;
 
+        /// <summary>
+        /// Tracks the number of Actors in the level,
+        /// used to assign ActorIds
+        /// </summary>
         protected static int _count = 0;
+        /// <summary>
+        /// Accessor for the Count
+        /// </summary>
         public int Count
         {
             get
@@ -22,7 +29,13 @@ namespace Zombies
             }
         }
 
+        /// <summary>
+        /// Unique ActorId's required for use with ZombieGraph
+        /// </summary>
         protected int _ActorId;
+        /// <summary>
+        /// Accessor for the ActorId
+        /// </summary>
         public int ActorId
         {
             get
@@ -38,10 +51,12 @@ namespace Zombies
 
         public virtual void Awake()
         {
-            _graph = ZombieGraph.Instance;
-            _gc = GameObject
+            _graph  = ZombieGraph.Instance;
+            _gc     = GameObject
                 .FindGameObjectWithTag("GameController")
                 .GetComponent<GameController>();
+
+            // simple integer identifiers
             ActorId = ++_count;
         }
 
@@ -69,24 +84,28 @@ namespace Zombies
         /// <returns></returns>
         public virtual bool Equals(Actor other)
         {
-            if (other == null)
+            if (other == null) {
                 return false;
+            }
 
-            if (this.ActorId == other.ActorId)
+            if (this.ActorId == other.ActorId) {
                 return true;
+            }
 
             return false;
         }
 
         public override bool Equals(object o)
         {
-            if (o == null)
+            if (o == null) {
                 return false;
+            }
 
             Actor actor = o as Actor;
 
-            if (actor == null)
+            if (actor == null) {
                 return false;
+            }
 
             return Equals(actor);
         }
@@ -105,7 +124,7 @@ namespace Zombies
         {
             string relationships = "R:" + this.ActorId + " - ";
             foreach (Connection conn in _graph.GetDirectConnections(this)) {
-                relationships += conn.Relationship.RelationshipType + "'s " + conn.To + "";
+                relationships += conn.Relationship.RelationshipType + "'s " + conn.To + " ";
             }
 
             // print to the console
@@ -120,10 +139,12 @@ namespace Zombies
                 relationshipsMsg += conn.Relationship.RelationshipType + "'s " + conn.To + "\n";
             }
 
-            if (player)
+            if (player) {
                 _gc.SetRelationshipText(relationshipsMsg);
-            else
+            }
+            else {
                 _gc.SetInfoText(relationshipsMsg);
+            }
         }
     }
 }

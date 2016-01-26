@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using Zombies;
-using Zombies.Collectables;
 
+/// <summary>
+/// Used to place an item to either the hand or overhead the character
+/// </summary>
 public class Collect : MonoBehaviour
 {
     // location to place collectables
     public Transform handCollectable;   // carried in hand
     public Transform headCollectable;   // carried overhead
 
-    private ZombieGraph _graph = ZombieGraph.Instance;
+    protected ZombieGraph _graph = ZombieGraph.Instance;
 
     public void placeItem(GameObject item, CollectableType type)
     {

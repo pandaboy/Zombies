@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using Zombies;
 
-// detects if the character was clicked on
+/// <summary>
+/// Detects if the actor was clicked on, and displays their relationships
+/// if true
+/// </summary>
 public class ClickCharacter : MonoBehaviour
 {
-    private Actor _actor;
-
-    private GameController _gc;
-    private ZombieGraph _graph;
+    protected Actor _actor;
+    protected GameController _gc;
+    protected ZombieGraph _graph;
 
     void Start()
     {

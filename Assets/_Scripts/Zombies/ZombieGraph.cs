@@ -6,6 +6,9 @@ using RelationshipGraph.Interfaces;
 
 namespace Zombies
 {
+    /// <summary>
+    /// Wrapper class for the DeepGraph, with simpler methods
+    /// </summary>
     public sealed class ZombieGraph
     {
         private DeepGraph<Actor, Connection, Relationship> _graph;
@@ -54,12 +57,11 @@ namespace Zombies
         /// <returns></returns>
         public bool KnowsConnectionsOf(Actor actor, Actor other)
         {
-            if (_graph.IsGraphed(actor))
-            {
-                foreach (Connection connection in GetIndirectConnections(actor))
-                {
-                    if (connection.To.Equals(other) || connection.From.Equals(other))
+            if (_graph.IsGraphed(actor)) {
+                foreach (Connection connection in GetIndirectConnections(actor)) {
+                    if (connection.To.Equals(other) || connection.From.Equals(other)) {
                         return true;
+                    }
                 }
             }
 
@@ -102,12 +104,9 @@ namespace Zombies
         {
             IList<Connection> otherConnections = new List<Connection>();
 
-            if (_graph.IsGraphed(actor))
-            {
-                foreach (Connection connection in GetConnections(actor))
-                {
-                    if (connection.From.Equals(other) || connection.To.Equals(other))
-                    {
+            if (_graph.IsGraphed(actor)) {
+                foreach (Connection connection in GetConnections(actor)) {
+                    if (connection.From.Equals(other) || connection.To.Equals(other)) {
                         otherConnections.Add(connection);
                     }
                 }
@@ -120,12 +119,9 @@ namespace Zombies
         {
             IList<Connection> known = new List<Connection>();
 
-            if (_graph.IsGraphed(actor))
-            {
-                foreach (Connection connection in GetIndirectConnections(actor))
-                {
-                    if (connection.From.Equals(other) || connection.To.Equals(other))
-                    {
+            if (_graph.IsGraphed(actor)) {
+                foreach (Connection connection in GetIndirectConnections(actor)) {
+                    if (connection.From.Equals(other) || connection.To.Equals(other)) {
                         known.Add(connection);
                     }
                 }
@@ -143,10 +139,8 @@ namespace Zombies
         {
             ICollection<Actor> direct = new List<Actor>();
 
-            if (_graph.IsGraphed(actor))
-            {
-                foreach (Connection connection in GetDirectConnections(actor))
-                {
+            if (_graph.IsGraphed(actor)) {
+                foreach (Connection connection in GetDirectConnections(actor)) {
                     direct.Add(connection.To);
                 }
             }
@@ -158,17 +152,13 @@ namespace Zombies
         {
             ICollection<Actor> indirect = new List<Actor>();
 
-            if (_graph.IsGraphed(actor))
-            {
-                foreach (Connection connection in GetIndirectConnections(actor))
-                {
-                    if (!indirect.Contains(connection.From))
-                    {
+            if (_graph.IsGraphed(actor)) {
+                foreach (Connection connection in GetIndirectConnections(actor)) {
+                    if (!indirect.Contains(connection.From)) {
                         indirect.Add(connection.From);
                     }
 
-                    if (!indirect.Contains(connection.To))
-                    {
+                    if (!indirect.Contains(connection.To)) {
                         indirect.Add(connection.To);
                     }
                 }
@@ -181,16 +171,12 @@ namespace Zombies
         {
             ICollection<Connection> common = new List<Connection>();
 
-            if (_graph.IsGraphed(actor) && _graph.IsGraphed(other))
-            {
-                foreach (Connection i in GetDirectConnections(actor))
-                {
-                    foreach (Connection j in GetDirectConnections(other))
-                    {
+            if (_graph.IsGraphed(actor) && _graph.IsGraphed(other)) {
+                foreach (Connection i in GetDirectConnections(actor)) {
+                    foreach (Connection j in GetDirectConnections(other)) {
                         // if they both point to the same entity, 
                         // they share connections to that that entity
-                        if (i.To.Equals(j.To))
-                        {
+                        if (i.To.Equals(j.To)) {
                             // add both connections
                             common.Add(i);
                             common.Add(j);
@@ -286,23 +272,19 @@ namespace Zombies
             foreach (KeyValuePair<Actor, IList<Connection>> item in this._graph)
             {
                 // skip the entity passed in
-                if (item.Key.Equals(actor))
-                {
+                if (item.Key.Equals(actor)) {
                     continue;
                 }
 
-                for (int i = 0; i < item.Value.Count; i++)
-                {
-                    if (item.Value[i].From.Equals(actor) || item.Value[i].To.Equals(actor))
-                    {
+                for (int i = 0; i < item.Value.Count; i++) {
+                    if (item.Value[i].From.Equals(actor) || item.Value[i].To.Equals(actor)) {
                         item.Value.RemoveAt(i);
                     }
                 }
             }
 
             // remove the connections stored for this entity
-            if (complete)
-            {
+            if (complete) {
                 _graph.Remove(actor);
             }
 
@@ -319,8 +301,7 @@ namespace Zombies
         {
             ICollection<Connection> otherConnections = GetConnectionsOf(actor, other);
 
-            foreach (Connection connection in otherConnections)
-            {
+            foreach (Connection connection in otherConnections) {
                 _graph.RemoveEdge(actor, connection);
             }
 
@@ -358,14 +339,10 @@ namespace Zombies
         {
             IList<Actor> matches = new List<Actor>();
 
-            if (_graph.IsGraphed(actor))
-            {
-                foreach (Connection connection in GetDirectConnections(actor))
-                {
-                    foreach (Relationship rel in connection.History)
-                    {
-                        if (rel.Equals(relationship))
-                        {
+            if (_graph.IsGraphed(actor)) {
+                foreach (Connection connection in GetDirectConnections(actor)) {
+                    foreach (Relationship rel in connection.History) {
+                        if (rel.Equals(relationship)) {
                             matches.Add(connection.To);
                         }
                     }
@@ -380,27 +357,21 @@ namespace Zombies
             IList<Actor> matches = new List<Actor>();
 
             // we have to check all the connections for each entity
-            foreach (IList<Connection> connections in _graph.Values)
-            {
+            foreach (IList<Connection> connections in _graph.Values) {
                 // go through each connection
-                foreach (Connection connection in connections)
-                {
-
+                foreach (Connection connection in connections) {
                     // if the source of the connection is the same as the entity it will not work and can be skipped
                     // i.e. an entity can't have relationship history with itself.
-                    if (connection.From.Equals(actor))
-                    {
+                    if (connection.From.Equals(actor)) {
                         continue;
                     }
 
                     // in each connection look through the relationship history
-                    foreach (Relationship rel in connection.History)
-                    {
+                    foreach (Relationship rel in connection.History) {
                         // if the connection is TO the entity,
                         // and the relationship matches
                         // and it hasn't already been catalogued - add it.
-                        if (rel.Equals(relationship) && connection.To.Equals(actor) && !matches.Contains(connection.From))
-                        {
+                        if (rel.Equals(relationship) && connection.To.Equals(actor) && !matches.Contains(connection.From)) {
                             matches.Add(connection.From);
                         }
                     }
@@ -417,24 +388,20 @@ namespace Zombies
 
         public IList<Relationship> GetRelationshipHistory(Actor actor, Actor other)
         {
-            if (ActorHasConnection(actor, actor, other))
-            {
+            if (ActorHasConnection(actor, actor, other)) {
                 return GetConnection(actor, other).Relationships;
             }
-            else
-            {
+            else {
                 return new List<Relationship>();
             }
         }
 
         public bool HaveRelationship(Actor actor, Actor other, Relationship relationship)
         {
-            if (ActorHasConnection(actor, actor, other))
-            {
+            if (ActorHasConnection(actor, actor, other)) {
                 Connection connection = GetActorConnection(actor, actor, other);
 
-                if (connection.Relationship.Equals(relationship))
-                {
+                if (connection.Relationship.Equals(relationship)) {
                     return true;
                 }
             }
@@ -449,12 +416,9 @@ namespace Zombies
 
         public bool HaveRelationshipHistory(Actor actor, Actor other, Relationship relationship)
         {
-            if (ActorHasConnection(actor, actor, other))
-            {
-                foreach (Relationship rel in GetConnection(actor, other).Relationships)
-                {
-                    if (rel.Equals(relationship))
-                    {
+            if (ActorHasConnection(actor, actor, other)) {
+                foreach (Relationship rel in GetConnection(actor, other).Relationships) {
+                    if (rel.Equals(relationship)) {
                         return true;
                     }
                 }
@@ -511,22 +475,17 @@ namespace Zombies
         /// </summary>
         public void PrintConnections()
         {
-            if (_graph.Count > 0)
-            {
+            if (_graph.Count > 0) {
                 Debug.Log(">> CONNECTIONS:");
 
-                foreach (KeyValuePair<Actor, IList<Connection>> item in _graph)
-                {
+                foreach (KeyValuePair<Actor, IList<Connection>> item in _graph) {
                     Debug.Log(item.Key);
-
-                    foreach (Connection connection in item.Value)
-                    {
+                    foreach (Connection connection in item.Value) {
                         Debug.Log(connection);
                     }
                 }
             }
-            else
-            {
+            else {
                 Debug.Log(">> NO CONNECTIONS");
             }
             Debug.Log("--");

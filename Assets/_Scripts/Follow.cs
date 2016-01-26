@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Instructs NavMeshAgent to follow the Target
+/// </summary>
 public class Follow : MonoBehaviour
 {
-    private NavMeshAgent _agent;
+    protected NavMeshAgent _agent;
 
-    private bool _canFollow = false;
+    protected bool _canFollow = false;
     public bool CanFollow
     {
         get
@@ -18,7 +21,7 @@ public class Follow : MonoBehaviour
         }
     }
 
-    private GameObject _target;
+    protected GameObject _target;
     public GameObject Target
     {
         get

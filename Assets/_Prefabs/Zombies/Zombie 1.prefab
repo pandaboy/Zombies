@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad34938dbdafe7f478efbc6f4ee88f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actorType: 1
   damageAmount: 1
   distanceToDamage: 1.10000002
   timeBetweenAttacks: .5
@@ -222,6 +223,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: follow
       value: NPC,Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: actorType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

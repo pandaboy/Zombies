@@ -593,7 +593,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: zombieLocations.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
       propertyPath: citizenLocations.Array.size
@@ -707,6 +707,10 @@ Prefab:
       propertyPath: exitPrefab
       value: 
       objectReference: {fileID: 140934, guid: f12861dfa50f9ee4291eb54956296d24, type: 2}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: zombieLocations.Array.data[0]
+      value: 
+      objectReference: {fileID: 1980897857}
     m_RemovedComponents:
     - {fileID: 11429842, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
@@ -1668,6 +1672,7 @@ Transform:
   - {fileID: 163025539}
   - {fileID: 1003777403}
   - {fileID: 2054409693}
+  - {fileID: 1980897857}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1 &1203640953
@@ -2717,6 +2722,33 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 474518, guid: fa76f1c8ce0b746c39975362a0795b9c, type: 2}
   m_PrefabInternal: {fileID: 1937940742}
+--- !u!1 &1980897856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1980897857}
+  m_Layer: 0
+  m_Name: Zombie
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1980897857
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1980897856}
+  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: 4, y: 0, z: -6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1143323514}
+  m_RootOrder: 4
 --- !u!1 &2049483003
 GameObject:
   m_ObjectHideFlags: 0

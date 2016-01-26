@@ -3,16 +3,19 @@ using UnityEngine.UI;
 using Zombies;
 using System.Collections.Generic;
 
+/// <summary>
+/// Manages the player, including relationships and UI elements
+/// </summary>
 public class Player : Actor
 {
-    private Damage _damage;
+    protected Damage _damage;
 
     void Start()
     {
         _damage = GetComponent<Damage>();
 
         // set the player health
-        this._gc.SetHealthText(_damage.health.ToString());
+        _gc.SetHealthText(_damage.health.ToString());
     }
 
     void OnTriggerEnter(Collider other)
@@ -22,6 +25,7 @@ public class Player : Actor
             // create a 'stranger' relationship with this other character
             _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.STRANGER));
 
+            // update the relationships for the player
             DisplayRelationships(true);
         }
     }
@@ -42,6 +46,4 @@ public class Player : Actor
     {
         return _graph.WithRelationshipTo(this, new Relationship(RelationshipType.FOLLOWER));
     }
-
-
 }

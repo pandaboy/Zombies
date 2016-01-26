@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
-using Zombies.Collectables;
+using Zombies;
 
+/// <summary>
+/// Defines the type of collectable this is, and calls the placeItem()
+/// method on the collecting class
+/// </summary>
 public class Collectable : MonoBehaviour
 {
     public CollectableType collectableType;
