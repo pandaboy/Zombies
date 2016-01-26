@@ -32,6 +32,7 @@ public class Player : Actor
         if (_damage.health <= 0) {
             // display title text
             _gc.SetTitleText("YOU ARE A ZOMBIE");
+            _gc.DisplayDeathScreen();
         }
 
         // update UI with new health value

@@ -6,6 +6,13 @@ public class Damage : MonoBehaviour
     private GameController _gc;
     private Zombify _zombifier;
     private ParticleSystem _particleSystem;
+    public ParticleSystem ParticleSystem
+    {
+        get
+        {
+            return _particleSystem;
+        }
+    }
     private bool isZombie;
 
     public int health = 100;
@@ -19,6 +26,9 @@ public class Damage : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        // spray some blood
+        // _particleSystem.Play();
+
         health -= amount;
 
         // Check if we need to turn into a zomie
@@ -31,8 +41,5 @@ public class Damage : MonoBehaviour
 
             isZombie = true;
         }
-
-        // spray some blood
-        _particleSystem.Play();
     }
 }

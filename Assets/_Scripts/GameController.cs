@@ -100,6 +100,11 @@ public class GameController : MonoBehaviour
     // Main Camera
     private GameObject mainCamera;
 
+    // Level loading logic
+    public string nextLevel = "";
+    public Button nextLevelButton;
+    public Button restartLevelButton;
+
     void Awake()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -167,6 +172,14 @@ public class GameController : MonoBehaviour
         }
 	}
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            DisplayDeathScreen();
+        }
+    }
+
     public void SetTitleText(string msg)
     {
         titleText.text = msg;
@@ -190,5 +203,25 @@ public class GameController : MonoBehaviour
     public void SetHealthText(string msg)
     {
         healthText.text = msg;
+    }
+
+    public void NextLevel()
+    {
+        Application.LoadLevel(nextLevel);
+    }
+
+    public void RestartLevel()
+    {
+        Application.LoadLevel(Application.loadedLevelName);
+    }
+
+    public void DisplayDeathScreen()
+    {
+        titleText.enabled = true;
+        nextLevelButton.GetComponentInChildren<Text>().enabled = true;
+        restartLevelButton.GetComponentInChildren<Text>().enabled = true;
+
+        // disable player controls
+        player.GetComponent<ClickToMoveTo>().enabled = false;
     }
 }

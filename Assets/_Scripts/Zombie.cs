@@ -36,7 +36,7 @@ public class Zombie : MonoBehaviour
     {
         timer = 0f;
 
-        if (targetHealth.health > 0)
+        if (targetHealth.health >= 0)
         {
             targetHealth.TakeDamage(damageAmount);
         }
@@ -49,6 +49,7 @@ public class Zombie : MonoBehaviour
             inRange = true;
             target = other.gameObject;
             targetHealth = target.GetComponent<Damage>();
+            targetHealth.ParticleSystem.Play();
         }
     }
 
@@ -57,6 +58,7 @@ public class Zombie : MonoBehaviour
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC")
         {
             inRange = false;
+            targetHealth.ParticleSystem.Stop();
         }
     }
 }

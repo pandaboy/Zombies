@@ -370,6 +370,80 @@ Transform:
   - {fileID: 228364920}
   m_Father: {fileID: 404676056}
   m_RootOrder: 6
+--- !u!1 &225677362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 225677366}
+  - 114: {fileID: 225677365}
+  - 114: {fileID: 225677364}
+  - 114: {fileID: 225677363}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &225677363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225677362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowActivationOnStandalone: 0
+--- !u!114 &225677364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225677362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
+  m_AllowActivationOnMobileDevice: 0
+--- !u!114 &225677365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225677362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &225677366
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225677362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1001 &228364919
 Prefab:
   m_ObjectHideFlags: 0
@@ -633,9 +707,28 @@ Prefab:
       propertyPath: citizenLocations.Array.data[2]
       value: 
       objectReference: {fileID: 1084948224}
-    m_RemovedComponents: []
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: nextLevel
+      value: level3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: nextLevelButton
+      value: 
+      objectReference: {fileID: 319663419}
+    - target: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: restartLevelButton
+      value: 
+      objectReference: {fileID: 319663418}
+    m_RemovedComponents:
+    - {fileID: 11429842, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &268598483 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11485760, guid: 27e1ac614bff6764897253736fa66c4a,
+    type: 2}
+  m_PrefabInternal: {fileID: 268598482}
+  m_Script: {fileID: 11500000, guid: 3e27ac9ad093f2642ac9e8a6ccab64c3, type: 3}
 --- !u!1001 &318767484
 Prefab:
   m_ObjectHideFlags: 0
@@ -747,7 +840,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427918, guid: a750e7f7104f184448b885ab201be74d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22427918, guid: a750e7f7104f184448b885ab201be74d, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -789,6 +882,22 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11416154, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 268598483}
+    - target: {fileID: 11416154, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 11422234, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 268598483}
+    - target: {fileID: 11422234, guid: a750e7f7104f184448b885ab201be74d, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextLevel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a750e7f7104f184448b885ab201be74d, type: 2}
   m_IsPrefabParent: 0
@@ -822,6 +931,18 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 319663412}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &319663418 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11416154, guid: a750e7f7104f184448b885ab201be74d,
+    type: 2}
+  m_PrefabInternal: {fileID: 319663412}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &319663419 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11422234, guid: a750e7f7104f184448b885ab201be74d,
+    type: 2}
+  m_PrefabInternal: {fileID: 319663412}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &329263038
 Prefab:
   m_ObjectHideFlags: 0
@@ -5074,7 +5195,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405528, guid: aa5acc4d10bdd6a409a3a676b9f235c6, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 167878, guid: aa5acc4d10bdd6a409a3a676b9f235c6, type: 2}
       propertyPath: m_Name
