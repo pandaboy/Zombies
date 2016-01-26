@@ -16,6 +16,8 @@ public class Player : Actor
 
         // set the player health
         _gc.SetHealthText(_damage.health.ToString());
+
+        DisplayRelationships();
     }
 
     void OnTriggerEnter(Collider other)
@@ -45,5 +47,26 @@ public class Player : Actor
     public IList<Actor> GetFollowers()
     {
         return _graph.WithRelationshipTo(this, new Relationship(RelationshipType.FOLLOWER));
+    }
+
+    public override void DisplayRelationships(bool player = false)
+    {
+        string info = "Name: " + Name + "\n";
+
+        // what type are we?
+        info += "TYPE: ";
+        info += StringifyActorType(actorType) + "\n";
+
+        info += "RELATIONSHIPS:\n";
+        if (_graph.GetDirectConnections(this).Count == 0) {
+            info += "No relationships yet!";
+        }
+        foreach (Connection conn in _graph.GetDirectConnections(this)) {
+            info += "- " + StringifyRelationshipType(conn.Relationship.RelationshipType);
+            info += " " + conn.To.Name + "\n";
+        }
+
+        _gc.SetRelationshipText(info);
+        // base.DisplayRelationships(false);
     }
 }

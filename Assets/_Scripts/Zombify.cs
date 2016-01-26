@@ -44,6 +44,7 @@ public class Zombify : MonoBehaviour
         // disable the citizen component if present
         if (_citizen) {
             _citizen.enabled = false;
+            _citizen.IsRescued = false;
         }
 
         // disable the player component if present

@@ -12,10 +12,12 @@ public class Collect : MonoBehaviour
 
     protected ZombieGraph _graph;
     protected GameController _gc;
+    protected Player _player;
 
     void Start()
     {
         _graph = ZombieGraph.Instance;
+        _player = GetComponent<Player>();
         _gc = GameObject
             .FindGameObjectWithTag("GameController")
             .GetComponent<GameController>();
@@ -42,10 +44,16 @@ public class Collect : MonoBehaviour
         // - the player will trust items that they pick up that they can
         //   carry in hand, but distrust items that have to be carried overhead (for safety)
         if (type == CollectableType.HAND) {
+            // always nice to have a weapon handy
             _graph.AddDirectConnection(new Connection(gameObject, item, RelationshipType.TRUST));
+            // make the player an authority after picking up a weapon
+            _player.actorType = ActorType.AUTHORITY;
         }
         else {
+            // player will not like carrying animals
             _graph.AddDirectConnection(new Connection(gameObject, item, RelationshipType.DISTRUST));
+            // animals make us all nicer people
+            _player.actorType = ActorType.FRIENDLY;
         }
 
         // increase the number of items collected

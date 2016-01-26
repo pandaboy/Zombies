@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 401242}
   - 114: {fileID: 11428404}
   m_Layer: 0
-  m_Name: ItemGroup
+  m_Name: WeaponGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70038e288753734a8fe3b5dc66382fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGroup: 1
   actorType: 2
 --- !u!1001 &100100000
 Prefab:
@@ -50,6 +51,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: actorType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isGroup
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

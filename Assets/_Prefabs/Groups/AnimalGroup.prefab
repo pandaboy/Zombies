@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 401242}
   - 114: {fileID: 11428404}
   m_Layer: 0
-  m_Name: DangerGroup
+  m_Name: AnimalGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGroup: 1
-  actorType: 1
+  actorType: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -50,7 +50,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: actorType
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isGroup

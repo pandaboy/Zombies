@@ -60,6 +60,9 @@ public class GameController : MonoBehaviour
         set
         {
             _zombified = value;
+            if (_rescued < 0) {
+                _rescued = 0;
+            }
         }
 
         get
@@ -74,6 +77,9 @@ public class GameController : MonoBehaviour
         set
         {
             _rescued = value;
+            if (_rescued < 0) {
+                _rescued = 0;
+            }
             citizensText.text = "Saved: " + _rescued;
         }
 
@@ -89,6 +95,9 @@ public class GameController : MonoBehaviour
         set
         {
             _items = value;
+            if (_items < 0) {
+                _items = 0;
+            }
             itemsText.text = "Items: " + _items;
         }
 
@@ -115,6 +124,8 @@ public class GameController : MonoBehaviour
     public string nextLevel = "";
     public Button nextLevelButton;
     public Button restartLevelButton;
+
+    private float lerpTime = 0.0f;
 
 	void Start ()
     {
@@ -147,16 +158,16 @@ public class GameController : MonoBehaviour
         // spawn the citizens
         if (citizenPrefabs.Length > 0 && citizenLocations.Length > 0) {
             for (int i = 0; i < citizenLocations.Length; i++) {
-                GameObject cgo = Instantiate(
+                GameObject citizenGO = Instantiate(
                     citizenPrefabs[(i % citizenPrefabs.Length)],
                     citizenLocations[i].position,
                     citizenLocations[i].rotation
                 ) as GameObject;
 
-                // create a 'stranger' relationship with this other character
+                // citizens will trust the GROUP
                 _graph.AddDirectConnection(
                     new Connection(
-                        cgo.GetComponent<Actor>(),
+                        citizenGO.GetComponent<Actor>(),
                         Group.GetComponent<Actor>(),
                         Zombies.RelationshipType.TRUST
                     )
@@ -164,7 +175,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        // spawn the items
+        // spawn weapons
         if (itemPrefabs.Length > 0 && itemLocations.Length > 0) {
             for (int i = 0; i < itemLocations.Length; i++) {
                 GameObject igo = Instantiate(
@@ -173,7 +184,7 @@ public class GameController : MonoBehaviour
                     itemLocations[i].rotation
                 ) as GameObject;
 
-                igo.GetComponent<Actor>().actorType = ActorType.ITEM;
+                igo.GetComponent<Actor>().actorType = ActorType.WEAPON;
                 _graph.AddDirectConnection(
                     new Connection(
                         igo.GetComponent<Actor>(),
@@ -190,6 +201,8 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) {
             DisplayEndScreen("YOU ARE A ZOMBIE");
         }
+
+        FadeDialogText();
     }
 
     public void SetTitleText(string msg)
@@ -200,6 +213,18 @@ public class GameController : MonoBehaviour
     public void SetDialogText(string msg)
     {
         dialogText.text = msg;
+        dialogText.color = Color.white;
+        lerpTime = 0.0f;
+    }
+
+    void FadeDialogText()
+    {
+        // fade out the dialogText
+        if (lerpTime < 1.0f) {
+            lerpTime += Time.deltaTime * 0.15f;
+        }
+
+        dialogText.color = Color.Lerp(Color.white, Color.clear, lerpTime);
     }
 
     public void SetInfoText(string msg)

@@ -27,7 +27,6 @@ GameObject:
   - 54: {fileID: 5477062}
   - 195: {fileID: 19566360}
   - 135: {fileID: 13558324}
-  - 114: {fileID: 11487306}
   - 114: {fileID: 11452676}
   - 114: {fileID: 11466632}
   - 114: {fileID: 11426530}
@@ -237,6 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f496abd37f9eaaf49b12bfc207683549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actorType: 4
+  trustsType: 3
 --- !u!114 &11466632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,18 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2f38d8a0b83aa4bbe22b73c39f5472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11487306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d70038e288753734a8fe3b5dc66382fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actorType: 3
 --- !u!114 &11492702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,6 +315,10 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: actorType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: trustsType
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []

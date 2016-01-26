@@ -2,31 +2,47 @@
 using Zombies;
 
 /// <summary>
-/// Detects if the actor was clicked on, and displays their relationships
+/// Detects if the actor was (double) clicked on, and displays their relationships
 /// if true
 /// </summary>
 public class ClickCharacter : MonoBehaviour
 {
-    protected Actor _actor;
-    protected GameController _gc;
-    protected ZombieGraph _graph;
-
-    void Start()
-    {
-        _graph = ZombieGraph.Instance;
-        _actor = GetComponent<Actor>();
-        _gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-    }
+    // detect double clicks
+    protected bool _oneClick = false;
+    protected float _timer;
+    protected float _clickDelay = 0.5f;
 	
 	void Update ()
     {
         if (Input.GetMouseButtonDown(0)) {
-            RaycastHit hit;
+            if (!_oneClick) {
+                _oneClick = true;
+                _timer = Time.time;
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
-                if (hit.transform.tag == "NPC") {
-                    _actor.DisplayRelationships();
+                // single click
+                RaycastHit hit;
+
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                {
+                    if (hit.transform.tag == "NPC")
+                    {
+                        hit.transform.GetComponent<Actor>().DisplayRelationships();
+                    }
+
+                    if (hit.transform.tag == "Player")
+                    {
+                        hit.transform.GetComponent<Actor>().DisplayRelationships();
+                    }
                 }
+            }
+            else {
+                _oneClick = false;
+            }
+        }
+
+        if(_oneClick) {
+            if((Time.time - _timer) > _clickDelay) {
+                _oneClick = false;
             }
         }
     }

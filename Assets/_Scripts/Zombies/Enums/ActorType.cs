@@ -7,7 +7,9 @@
     {
         AUTHORITY, // e.g. Police, Army, Priest (?), Fireman, Politician
         DANGEROUS, // e.g. Thief, Hobo, Alien, Naked
-        ITEM,      // e.g. Weapon, Animal
+        WEAPON,    // e.g. Stick
+        ANIMAL,    // e.g. Cat, Dog
+        FRIENDLY,  // e.g. Friendly actor
         NEUTRAL    // Everybody else
     }
 }

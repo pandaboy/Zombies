@@ -49,8 +49,20 @@ namespace Zombies
             }
         }
 
+        protected string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+        }
+
+        public bool isGroup = false;
+
         public virtual void Awake()
         {
+            _name   = RandomName();
             _graph  = ZombieGraph.Instance;
             _gc     = GameObject
                 .FindGameObjectWithTag("GameController")
@@ -132,7 +144,7 @@ namespace Zombies
         }
 
         // updates the UI with this Actors Direct Relationships
-        public void DisplayRelationships(bool player = false)
+        public virtual void DisplayRelationships(bool player = false)
         {
             string relationshipsMsg = "";
             foreach (Connection conn in _graph.GetDirectConnections(this)) {
@@ -145,6 +157,72 @@ namespace Zombies
             else {
                 _gc.SetInfoText(relationshipsMsg);
             }
+        }
+
+        protected string StringifyActorType(ActorType aType)
+        {
+            switch (aType)
+            {
+                case ActorType.AUTHORITY:
+                    return "AUTHORITY FIGURES";
+
+                case ActorType.ANIMAL:
+                    return "ANIMAL LOVERS";
+
+                case ActorType.NEUTRAL:
+                    return "NEUTRALS";
+
+                case ActorType.FRIENDLY:
+                    return "FRIENDLY PEOPLE";
+
+                case ActorType.DANGEROUS:
+                    return "DANGEROUS FOLK";
+
+                default:
+                    return aType.ToString();
+            }
+        }
+
+        protected string StringifyRelationshipType(RelationshipType rType)
+        {
+            switch (rType)
+            {
+                case RelationshipType.TRUST:
+                    return "TRUSTS";
+
+                case RelationshipType.DISTRUST:
+                    return "DISTRUSTS";
+
+                case RelationshipType.SCARED:
+                    return "SCARED OF";
+
+                case RelationshipType.STRANGER:
+                    return "NO OPINION OF";
+
+                case RelationshipType.FOLLOWER:
+                    return "FOLLOWS";
+
+                case RelationshipType.MEMBER:
+                    return "MEMBER OF";
+
+                default:
+                    return rType.ToString();
+            }
+        }
+
+        string RandomName()
+        {
+            // Groups don't get names
+            if (isGroup) {
+                return actorType.ToString() + " types";
+            }
+
+            // returns a random name for the actor from the list
+            string[] names = {
+                "Brendan", "Kat", "Bob", "Jane", "Alice", "Charlie", "Marge"
+            };
+
+            return names[UnityEngine.Random.Range(0, names.Length)];
         }
     }
 }
