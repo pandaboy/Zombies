@@ -163,7 +163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1286544992}
-        m_MethodName: LoadNextLevel
+        m_MethodName: NextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -370,10 +370,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1286544986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42d3b9f7b02bf5f4a8cc83a003ffff73, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f557f1555f99e04980ad2a75a3597dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: level0
+  levelName: level0
 --- !u!1 &1433398728
 GameObject:
   m_ObjectHideFlags: 0
