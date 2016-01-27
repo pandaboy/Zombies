@@ -44,9 +44,16 @@ public class Player : Actor
         _gc.SetHealthText(_damage.health.ToString());
     }
 
+    // return the players followers
     public IList<Actor> GetFollowers()
     {
         return _graph.WithRelationshipTo(this, new Relationship(RelationshipType.FOLLOWER));
+    }
+
+    // return the players followers
+    public IList<Actor> GetItems()
+    {
+        return _graph.WithRelationship(this, new Relationship(RelationshipType.HAS));
     }
 
     public override void DisplayRelationships(bool player = false)
@@ -55,7 +62,7 @@ public class Player : Actor
 
         // what type are we?
         info += "TYPE: ";
-        info += StringifyActorType(actorType) + "\n";
+        info += StringifyActorTypeSingle(actorType) + "\n";
 
         info += "RELATIONSHIPS:\n";
         if (_graph.GetDirectConnections(this).Count == 0) {
@@ -67,6 +74,5 @@ public class Player : Actor
         }
 
         _gc.SetRelationshipText(info);
-        // base.DisplayRelationships(false);
     }
 }

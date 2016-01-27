@@ -58,6 +58,7 @@ namespace Zombies
             }
         }
 
+        public ActorGender gender;
         public bool isGroup = false;
 
         public virtual void Awake()
@@ -183,6 +184,30 @@ namespace Zombies
             }
         }
 
+        protected string StringifyActorTypeSingle(ActorType aType)
+        {
+            switch (aType)
+            {
+                case ActorType.AUTHORITY:
+                    return "AUTHORITY FIGURE";
+
+                case ActorType.ANIMAL:
+                    return "ANIMAL LOVER";
+
+                case ActorType.NEUTRAL:
+                    return "NEUTRAL";
+
+                case ActorType.FRIENDLY:
+                    return "FRIENDLY";
+
+                case ActorType.DANGEROUS:
+                    return "DANGEROUS PERSON";
+
+                default:
+                    return aType.ToString();
+            }
+        }
+
         protected string StringifyRelationshipType(RelationshipType rType)
         {
             switch (rType)
@@ -217,10 +242,32 @@ namespace Zombies
                 return actorType.ToString() + " types";
             }
 
+            if (actorType == ActorType.WEAPON)
+            {
+                return "weapons";
+            }
+
+            if (actorType == ActorType.ANIMAL)
+            {
+                return "animals";
+            }
+
             // returns a random name for the actor from the list
-            string[] names = {
-                "Brendan", "Kat", "Bob", "Jane", "Alice", "Charlie", "Marge"
+            string[] male_names = {
+                "Brendan", "Bob", "Charlie", "Tom"
             };
+
+            string[] female_names = {
+                "Kat", "Alice", "Marge", "Jane"
+            };
+
+            string[] names;
+            if (gender == ActorGender.MALE) {
+                names = male_names;
+            }
+            else {
+                names = female_names;
+            }
 
             return names[UnityEngine.Random.Range(0, names.Length)];
         }

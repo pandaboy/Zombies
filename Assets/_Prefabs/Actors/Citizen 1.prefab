@@ -236,6 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f496abd37f9eaaf49b12bfc207683549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gender: 1
+  isGroup: 0
   actorType: 4
   trustsType: 3
 --- !u!114 &11466632
@@ -320,6 +322,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: trustsType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gender
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

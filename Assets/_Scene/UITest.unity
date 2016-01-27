@@ -506,6 +506,18 @@ Prefab:
       propertyPath: itemLocations.Array.data[2]
       value: 
       objectReference: {fileID: 272482813}
+    - target: {fileID: 8281330, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c30484ffa25579f4692a94e8ec32b492, type: 3}
+    - target: {fileID: 8281330, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281330, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
+      propertyPath: m_Volume
+      value: .330000013
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27e1ac614bff6764897253736fa66c4a, type: 2}
   m_IsPrefabParent: 0

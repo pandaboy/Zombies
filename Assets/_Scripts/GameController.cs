@@ -164,7 +164,7 @@ public class GameController : MonoBehaviour
                     citizenLocations[i].rotation
                 ) as GameObject;
 
-                // citizens will trust the GROUP
+                // citizens will trust members of the GROUP
                 _graph.AddDirectConnection(
                     new Connection(
                         citizenGO.GetComponent<Actor>(),
@@ -178,19 +178,10 @@ public class GameController : MonoBehaviour
         // spawn weapons
         if (itemPrefabs.Length > 0 && itemLocations.Length > 0) {
             for (int i = 0; i < itemLocations.Length; i++) {
-                GameObject igo = Instantiate(
+                Instantiate(
                     itemPrefabs[(i % itemPrefabs.Length)],
                     itemLocations[i].position,
                     itemLocations[i].rotation
-                ) as GameObject;
-
-                igo.GetComponent<Actor>().actorType = ActorType.WEAPON;
-                _graph.AddDirectConnection(
-                    new Connection(
-                        igo.GetComponent<Actor>(),
-                        Group.GetComponent<Actor>(),
-                        Zombies.RelationshipType.MEMBER
-                    )
                 );
             }
         }

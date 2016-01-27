@@ -10,6 +10,8 @@ public class Citizen : Actor
     public ActorType trustsType;
 
     protected Follow _follow;
+    protected GameObject _turnTarget;
+    protected Actor _groupActor; // the groupActor for this scene
 
     protected bool _isRescued;
     public bool IsRescued
@@ -34,96 +36,172 @@ public class Citizen : Actor
     void Start()
     {
         _follow = GetComponent<Follow>();
+        _groupActor = _gc.Group.GetComponent<Actor>();
         _isRescued = false;
+    }
+
+    void Update()
+    {
+        if (_turnTarget) {
+            TurnTo();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player") {
-            CheckRelationship(other.gameObject);
+            CheckRelationships(other.gameObject);
+
+            if(!_isRescued) {
+                _turnTarget = other.gameObject;
+            }
         }
     }
 
-    private void CheckRelationship(GameObject other)
+    void OnTriggerExit(Collider other)
     {
-        // Use the Actor class with the ZombieGraph
-        Actor otherActor = other.GetComponent<Actor>();
+        if (_turnTarget == other.gameObject)
+        {
+            _turnTarget = null;
+        }
+    }
 
+    // returns true if we're following/rescued
+    private bool CheckRelationships(GameObject other)
+    {
+        Actor otherActor = other.GetComponent<Actor>();     // the actor for the other GameObject
+
+        // check direct relationship to the other actor
+        if (!CheckDirectRelationship(otherActor))
+        {
+            // check the other actors direct relationships
+            if (!CheckItems(otherActor))
+            {
+                // check relationship to their followers
+                return CheckFollowers(otherActor);
+            }
+        }
+
+        return true;
+    }
+
+    private bool CheckDirectRelationship(Actor other)
+    {
         // Get the connection from this actor to the other actor
-        Connection conn = _graph.GetConnection(this, otherActor);
+        Connection conn = _graph.GetConnection(this, other);
 
-        // if no connection exists, create a new "distrustful" relationship
-        if (conn == null) {
-            // check if we can trust the player
-            if (trustsType == otherActor.actorType) {
-                _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.FOLLOWER));
-
-                // put some dialog
-                _gc.SetDialogText("You look like someone I can trust!");
+        // no connection exists, make a decision based on actor types
+        if (conn == null)
+        {
+            // if the actor type matches our trust type, follow them
+            if (trustsType == other.actorType)
+            {
+                Rescue(other, "You look like someone I can trust!");
+                return true;
             }
-            else {
+            else
+            {
                 // initially distrusts the player, as the actorTypes don't match up
-                _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.DISTRUST));
-
-                // put some dialog
-                _gc.SetDialogText("I don't know you!");
+                _graph.AddDirectConnection(new Connection(this, other, RelationshipType.DISTRUST));
+                _gc.SetDialogText("I don't know you! I'm not going to follow you!");
+                return false;
             }
         }
-        else { // otherwise check the type of relationship to the other character
-            // if we trust them already, we'll just follow them
-            if (conn.Relationship.RelationshipType == RelationshipType.TRUST) {
-                _follow.Target = other;
-                _follow.CanFollow = true;
-                _gc.SetDialogText("Hey! I know you! I'm following you!");
-            }
-            else { // if we don't trust them, remind them of the relationship
-                _gc.SetDialogText("I met you before! I " + conn.Relationship.RelationshipType + " you!\nI'm not following you anywhere!");
+        else
+        {
+            // check the pre-existing relationship type
+            switch (conn.Relationship.RelationshipType)
+            {
+                // if we already follow them, just return
+                case RelationshipType.FOLLOWER:
+                    return true;
+
+                // if we trust them already, we'll just follow them
+                case RelationshipType.TRUST:
+                    Rescue(other, "Hey! I know you! I'm following you!");
+                    return true;
+
+                // if we don't trust them, remind them of the relationship
+                default:
+                    _gc.SetDialogText("I met you before! I " + conn.Relationship.RelationshipType + " you!\nI'm not following you anywhere!");
+                    return false;
             }
         }
 
-        // check the otherActor's followers to determine if we should follow them
+        return false;
+    }
+
+    private bool CheckItems(Actor other)
+    {
+        // Next let's check our Actor's relationship to the other actors direct connections
+        //ICollection<Actor> actors = _graph.GetDirectActors(other);
+        ICollection<Actor> actors = other.gameObject.GetComponent<Player>().GetItems();
+        foreach (Actor actor in actors)
+        {
+            Debug.Log(actor.actorType);
+            if (actor.actorType == trustsType)
+            {
+                Rescue(other, "I don't know you!\nBut I trust " + actor.Name + ", so I'll come along!");
+
+                return true;
+            }
+
+            // get the direct relationships to this other actor's groups
+            if (_graph.HaveRelationship(actor, _groupActor, RelationshipType.MEMBER))
+            {
+                Rescue(other, "I don't know you!\nBut I trust " + actor.Name + ", so I'll come along!");
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool CheckFollowers(Actor other)
+    {
+        // now check the otherActor's followers to determine if we should follow them
         ICollection<Actor> followers = other.gameObject.GetComponent<Player>().GetFollowers();
         foreach (Actor actor in followers)
         {
             // if we trust the other type, follow them
             if (actor.actorType == trustsType)
             {
-                // we follow the one we trust lol
-                _graph.AddDirectConnection(new Connection(this, actor, RelationshipType.FOLLOWER));
+                Rescue(actor, "I trust " + actor.Name + "! I'll follow THEM!");
 
-                _follow.Target = actor.gameObject;
-                _follow.CanFollow = true;
+                return true;
+            }
+            // if we trust the other types group, follow them
+            else if (_graph.HaveRelationship(actor, _groupActor, RelationshipType.MEMBER) && _groupActor.actorType == trustsType)
+            {
+                Rescue(other, actor.Name + " is an " + StringifyActorTypeSingle(trustsType) + ", so I'll following you!");
 
-                _gc.SetDialogText("I know " + actor + "! I'll follow THEM!");
-                IsRescued = true;
+                return true;
             }
         }
 
-        // Next let's check our Actor's relationship to the other actors connections
-        ICollection<Actor> actors = _graph.GetDirectActors(otherActor);
+        return false;
+    }
 
-        foreach (Actor actor in actors) {
-            // get the direct relationships to this other actor
-            if (_graph.HaveRelationship(actor, _gc.Group.GetComponent<Actor>(), RelationshipType.MEMBER)) {
-                // Actor agrees to become a follower
-                _graph.AddDirectConnection(new Connection(this, otherActor, RelationshipType.FOLLOWER));
+    protected void Rescue(Actor actor, string dialog = "")
+    {
+        // Actor agrees to become a follower
+        _graph.AddDirectConnection(new Connection(this, actor, RelationshipType.FOLLOWER));
 
-                _follow.Target = other;
-                _follow.CanFollow = true;
-                
-                _gc.SetDialogText("I don't know you!\nBut I trust " + actor + ", so I'll following you!");
-                IsRescued = true;
-            }
-        }
+        _follow.Target = actor.gameObject;
+        _follow.CanFollow = true;
+
+        _gc.SetDialogText(dialog);
+        IsRescued = true;
     }
 
     public override void DisplayRelationships(bool player = false)
     {
-        string info = "Name: " + Name + "\n";
+        string info = "NAME: " + Name + "\n";
 
         // what type are we?
-        info += "IS:\n";
-        info += " - " + StringifyActorType(actorType) + "\n";
+        info += "TYPE: ";
+        info += StringifyActorTypeSingle(actorType) + "\n";
 
         // who do we trust?
         info += "TRUSTS:\n";
@@ -132,7 +210,7 @@ public class Citizen : Actor
         // what relationships do we have?
         info += "RELATIONSHIPS:\n";
         if (_graph.GetDirectConnections(this).Count == 0) {
-            info += "No relationships yet!";
+            info += "NONE YET!";
         }
 
         foreach (Connection conn in _graph.GetDirectConnections(this)) {
@@ -141,6 +219,11 @@ public class Citizen : Actor
         }
 
         _gc.SetInfoText(info);
-        // base.DisplayRelationships(false);
+    }
+
+    // rotate to face target
+    void TurnTo()
+    {
+        gameObject.transform.LookAt(_turnTarget.transform.position);
     }
 }

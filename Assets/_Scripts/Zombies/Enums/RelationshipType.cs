@@ -10,6 +10,7 @@
         DISTRUST,   // Actor distrusts the other actor
         FOLLOWER,   // Actor agreed to follow the other actor
         STRANGER,   // Actor considers the other actor a stranger
-        SCARED      // Actor is scared of the other actor
+        SCARED,     // Actor is scared of the other actor
+        HAS         // Actor has/carries the other actor
     }
 }
